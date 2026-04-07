@@ -1,8 +1,8 @@
 aid: stormglass
 name: Stormglass
 description: >-
-  Global high-resolution wind power forecasts. All the weather data you need to
-  forecast and monitor green energy production in wind parks 
+  Global high-resolution wind power forecasts. All the weather data you need to forecast
+  and monitor green energy production in wind parks.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -18,8 +18,8 @@ apis:
   - aid: stormglass:stormglass
     name: Stormglass
     description: >-
-      Global high-resolution wind power forecasts. All the weather data you need
-      to forecast and monitor green energy production in wind parks 
+      Global high-resolution wind power forecasts. All the weather data you need to
+      forecast and monitor green energy production in wind parks.
     humanURL: https://stormglass.io/
     tags:
       - Weather
