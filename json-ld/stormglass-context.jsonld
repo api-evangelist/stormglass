@@ -1,0 +1,104 @@
+{
+  "@context": {
+    "@vocab": "https://stormglass.io/schema/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "qudt": "https://qudt.org/schema/qudt/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "WeatherMeasurement": "schema:Observation",
+    "MarineEnvironment": "schema:Observation",
+    "TideEvent": "schema:Event",
+    "AstronomicalEvent": "schema:Event",
+    "ElevationData": "schema:Place",
+    "hours": {
+      "@id": "schema:temporalCoverage",
+      "@container": "@list"
+    },
+    "time": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "lat": {
+      "@id": "geo:lat",
+      "@type": "xsd:float"
+    },
+    "lng": {
+      "@id": "geo:long",
+      "@type": "xsd:float"
+    },
+    "airTemperature": {
+      "@id": "schema:temperature",
+      "@type": "@json"
+    },
+    "windSpeed": {
+      "@id": "schema:speed",
+      "@type": "@json"
+    },
+    "windDirection": {
+      "@id": "schema:Course",
+      "@type": "@json"
+    },
+    "waveHeight": "schema:height",
+    "waveDirection": "schema:Course",
+    "wavePeriod": "schema:duration",
+    "swellHeight": "schema:height",
+    "waterTemperature": "schema:temperature",
+    "currentSpeed": "schema:speed",
+    "visibility": "schema:distance",
+    "precipitation": "schema:elevation",
+    "humidity": "schema:humidity",
+    "pressure": "schema:elevation",
+    "cloudCover": "schema:coverageArea",
+    "sunrise": {
+      "@id": "schema:sunrise",
+      "@type": "xsd:dateTime"
+    },
+    "sunset": {
+      "@id": "schema:sunset",
+      "@type": "xsd:dateTime"
+    },
+    "moonrise": {
+      "@id": "https://stormglass.io/schema/moonrise",
+      "@type": "xsd:dateTime"
+    },
+    "moonset": {
+      "@id": "https://stormglass.io/schema/moonset",
+      "@type": "xsd:dateTime"
+    },
+    "moonFraction": {
+      "@id": "https://stormglass.io/schema/moonFraction",
+      "@type": "xsd:float"
+    },
+    "tideHeight": {
+      "@id": "schema:height",
+      "@type": "xsd:float"
+    },
+    "tideType": {
+      "@id": "schema:additionalType"
+    },
+    "elevation": {
+      "@id": "schema:elevation",
+      "@type": "xsd:float"
+    },
+    "cost": {
+      "@id": "schema:price",
+      "@type": "xsd:integer"
+    },
+    "dailyQuota": "https://stormglass.io/schema/dailyQuota",
+    "requestCount": "https://stormglass.io/schema/requestCount",
+    "station": {
+      "@id": "schema:location"
+    },
+    "source": {
+      "@id": "schema:provider"
+    },
+    "uvIndex": {
+      "@id": "schema:uvIndex",
+      "@type": "xsd:float"
+    },
+    "chlorophyll": "https://stormglass.io/schema/chlorophyll",
+    "oxygen": "https://stormglass.io/schema/dissolvedOxygen",
+    "salinity": "https://stormglass.io/schema/salinity",
+    "ph": "https://stormglass.io/schema/ph"
+  }
+}

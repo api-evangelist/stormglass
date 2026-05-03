@@ -1,0 +1,329 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Stormglass Marine and Weather Intelligence"
+  description: >-
+    Unified capability for accessing global marine and weather data from Stormglass.
+    Combines weather forecasts, marine conditions, tidal data, astronomical events,
+    solar radiation, biological oceanographic measurements, and elevation data for
+    any coordinate on Earth. Used by maritime operators, renewable energy developers,
+    outdoor activity platforms, and environmental monitoring applications.
+  tags:
+    - Astronomy
+    - Bio
+    - Elevation
+    - Forecasting
+    - Marine
+    - Solar
+    - Tides
+    - Weather
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STORMGLASS_API_KEY: STORMGLASS_API_KEY
+
+capability:
+  consumes:
+    - import: stormglass
+      location: ./shared/stormglass.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: marine-weather-api
+      description: "Unified REST API for marine and weather intelligence."
+      resources:
+        - path: /v1/weather
+          name: weather
+          description: "Atmospheric weather forecast data"
+          operations:
+            - method: GET
+              name: get-weather
+              description: "Get hourly weather forecast for a coordinate"
+              call: "stormglass.get-weather-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+                start: "rest.start"
+                end: "rest.end"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/marine
+          name: marine
+          description: "Marine environment conditions"
+          operations:
+            - method: GET
+              name: get-marine
+              description: "Get marine environment data including waves and currents"
+              call: "stormglass.get-marine-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tides
+          name: tides
+          description: "Tidal forecast data"
+          operations:
+            - method: GET
+              name: get-tide-extremes
+              description: "Get high and low tide events"
+              call: "stormglass.get-tide-extremes"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                start: "rest.start"
+                end: "rest.end"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/sea-level
+          name: sea-level
+          description: "Hourly sea level data"
+          operations:
+            - method: GET
+              name: get-sea-level
+              description: "Get hourly sea level relative to datum"
+              call: "stormglass.get-tide-sea-level"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tide-stations
+          name: tide-stations
+          description: "Tide monitoring stations"
+          operations:
+            - method: GET
+              name: list-tide-stations
+              description: "List all available tide stations"
+              call: "stormglass.get-tide-stations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/astronomy
+          name: astronomy
+          description: "Astronomical event data"
+          operations:
+            - method: GET
+              name: get-astronomy
+              description: "Get sunrise, sunset, and moon data"
+              call: "stormglass.get-astronomy-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                start: "rest.start"
+                end: "rest.end"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/solar
+          name: solar
+          description: "Solar radiation data"
+          operations:
+            - method: GET
+              name: get-solar
+              description: "Get UV index and solar radiation data"
+              call: "stormglass.get-solar-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/bio
+          name: bio
+          description: "Biological oceanographic data"
+          operations:
+            - method: GET
+              name: get-bio
+              description: "Get chlorophyll, oxygen, and nutrient data"
+              call: "stormglass.get-bio-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/elevation
+          name: elevation
+          description: "Topographic and bathymetric elevation data"
+          operations:
+            - method: GET
+              name: get-elevation
+              description: "Get land elevation or ocean depth"
+              call: "stormglass.get-elevation-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: marine-weather-mcp
+      transport: http
+      description: "MCP server for AI-assisted marine and weather intelligence."
+      tools:
+        - name: get-weather-forecast
+          description: >-
+            Retrieve hourly atmospheric weather forecast for any global coordinate.
+            Returns temperature, wind, humidity, pressure, cloud cover, and precipitation.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-weather-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-marine-conditions
+          description: >-
+            Retrieve marine environment data for any ocean coordinate.
+            Returns wave height, wave direction, swell, water temperature, and currents.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-marine-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-tide-extremes
+          description: >-
+            Get predicted high tide and low tide events for a coastal location.
+            Returns tide timestamps, heights, and tide type (high/low).
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-tide-extremes"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            start: "tools.start"
+            end: "tools.end"
+            datum: "tools.datum"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-sea-level
+          description: "Get hourly sea level height for coastal planning and navigation"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-tide-sea-level"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-tide-stations
+          description: "List all available tide monitoring stations globally"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "stormglass.get-tide-stations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-astronomy
+          description: >-
+            Get astronomical data for any location: sunrise, sunset, moonrise,
+            moonset, moon phase, civil/nautical/astronomical dawn and dusk.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-astronomy-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-solar-radiation
+          description: >-
+            Retrieve solar radiation data including UV index and downward
+            short-wave radiation flux for any location. Useful for solar energy
+            assessment and UV exposure planning.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-solar-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-bio-ocean-data
+          description: >-
+            Get biological and oceanographic data for marine research.
+            Returns chlorophyll, dissolved oxygen, salinity, pH, nutrients,
+            and phytoplankton data.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-bio-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-elevation
+          description: >-
+            Get land elevation or ocean depth (bathymetry) for any coordinate.
+            Positive values indicate land elevation; negative values indicate
+            ocean depth in meters.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-elevation-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+          outputParameters:
+            - type: object
+              mapping: "$."

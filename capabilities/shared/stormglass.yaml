@@ -1,0 +1,598 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Stormglass API"
+  description: >-
+    Global marine and weather API providing point forecasts, tidal data,
+    astronomical events, solar radiation, biological oceanographic data,
+    and elevation information for any coordinate on Earth.
+  tags:
+    - Astronomy
+    - Bio
+    - Elevation
+    - Forecasting
+    - Marine
+    - Solar
+    - Tides
+    - Weather
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STORMGLASS_API_KEY: STORMGLASS_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: stormglass
+      baseUri: https://api.stormglass.io/v2
+      description: "Global marine and weather data API"
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{STORMGLASS_API_KEY}}"
+        placement: header
+      resources:
+        - name: weather
+          path: /weather
+          description: "Atmospheric weather forecast data"
+          operations:
+            - name: get-weather-point
+              method: GET
+              description: "Retrieve hourly weather forecast for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude of the coordinate"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude of the coordinate"
+                - name: params
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated weather parameters"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start timestamp (UTC)"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End timestamp (UTC)"
+                - name: source
+                  in: query
+                  type: string
+                  required: false
+                  description: "Data source filter"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: marine
+          path: /marine
+          description: "Marine environment data"
+          operations:
+            - name: get-marine-point
+              method: GET
+              description: "Retrieve hourly marine data for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude of the coordinate"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude of the coordinate"
+                - name: params
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated marine parameters"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start timestamp"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End timestamp"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: tides
+          path: /tide
+          description: "Tidal forecast and station data"
+          operations:
+            - name: get-tide-extremes
+              method: GET
+              description: "Retrieve high and low tide events for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+                - name: datum
+                  in: query
+                  type: string
+                  required: false
+                  description: "Datum: MLLW or MSL"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-tide-sea-level
+              method: GET
+              description: "Retrieve hourly sea level data for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start timestamp"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End timestamp"
+                - name: datum
+                  in: query
+                  type: string
+                  required: false
+                  description: "Datum: MLLW or MSL"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-tide-stations
+              method: GET
+              description: "List all available tide stations"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-tide-stations-area
+              method: GET
+              description: "List tide stations within a geographic bounding box"
+              inputParameters:
+                - name: box
+                  in: query
+                  type: string
+                  required: true
+                  description: "Bounding box coordinates: lat,lng:lat,lng"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: astronomy
+          path: /astronomy
+          description: "Astronomical data including sunrise, sunset, and moon phases"
+          operations:
+            - name: get-astronomy-point
+              method: GET
+              description: "Retrieve astronomical data for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: solar
+          path: /solar
+          description: "Solar radiation and UV index data"
+          operations:
+            - name: get-solar-point
+              method: GET
+              description: "Retrieve solar radiation data for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude"
+                - name: params
+                  in: query
+                  type: string
+                  required: true
+                  description: "Solar parameters (e.g. uvIndex)"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start timestamp"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End timestamp"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: bio
+          path: /bio
+          description: "Biological and oceanographic data"
+          operations:
+            - name: get-bio-point
+              method: GET
+              description: "Retrieve biological oceanographic data for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude"
+                - name: params
+                  in: query
+                  type: string
+                  required: true
+                  description: "Bio parameters (e.g. chlorophyll,oxygen)"
+                - name: start
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start timestamp"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End timestamp"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: elevation
+          path: /elevation
+          description: "Global elevation and bathymetry data"
+          operations:
+            - name: get-elevation-point
+              method: GET
+              description: "Retrieve elevation or ocean depth for a coordinate"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude"
+                - name: lng
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: stormglass-rest
+      resources:
+        - path: /v1/weather/point
+          name: weather-point
+          description: "Hourly weather forecast for a coordinate"
+          operations:
+            - method: GET
+              name: get-weather-point
+              description: "Get weather forecast data"
+              call: "stormglass.get-weather-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+                start: "rest.start"
+                end: "rest.end"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/marine/point
+          name: marine-point
+          operations:
+            - method: GET
+              name: get-marine-point
+              description: "Get marine environment data"
+              call: "stormglass.get-marine-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tide/extremes
+          name: tide-extremes
+          operations:
+            - method: GET
+              name: get-tide-extremes
+              description: "Get tide high and low events"
+              call: "stormglass.get-tide-extremes"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tide/sea-level
+          name: tide-sea-level
+          operations:
+            - method: GET
+              name: get-tide-sea-level
+              description: "Get hourly sea level data"
+              call: "stormglass.get-tide-sea-level"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tide/stations
+          name: tide-stations
+          operations:
+            - method: GET
+              name: get-tide-stations
+              description: "List all tide stations"
+              call: "stormglass.get-tide-stations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/astronomy/point
+          name: astronomy-point
+          operations:
+            - method: GET
+              name: get-astronomy-point
+              description: "Get astronomical data"
+              call: "stormglass.get-astronomy-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/solar/point
+          name: solar-point
+          operations:
+            - method: GET
+              name: get-solar-point
+              description: "Get solar radiation data"
+              call: "stormglass.get-solar-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/bio/point
+          name: bio-point
+          operations:
+            - method: GET
+              name: get-bio-point
+              description: "Get biological oceanographic data"
+              call: "stormglass.get-bio-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+                params: "rest.params"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/elevation/point
+          name: elevation-point
+          operations:
+            - method: GET
+              name: get-elevation-point
+              description: "Get elevation or bathymetry data"
+              call: "stormglass.get-elevation-point"
+              with:
+                lat: "rest.lat"
+                lng: "rest.lng"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: stormglass-mcp
+      transport: http
+      tools:
+        - name: get-weather-point
+          description: "Retrieve hourly weather forecast for any coordinate"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-weather-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-marine-point
+          description: "Retrieve marine data including waves and currents for a coordinate"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-marine-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-tide-extremes
+          description: "Get high and low tide events for a location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-tide-extremes"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-tide-sea-level
+          description: "Get hourly sea level height for a location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-tide-sea-level"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-tide-stations
+          description: "List all available tide monitoring stations"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "stormglass.get-tide-stations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-astronomy-point
+          description: "Get sunrise, sunset, moonrise, moonset, and moon phase for a location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-astronomy-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-solar-point
+          description: "Get solar radiation and UV index for a location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-solar-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-bio-point
+          description: "Get biological and oceanographic data for a marine location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-bio-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+            params: "tools.params"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-elevation-point
+          description: "Get land elevation or ocean bathymetry for a coordinate"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "stormglass.get-elevation-point"
+          with:
+            lat: "tools.lat"
+            lng: "tools.lng"
+          outputParameters:
+            - type: object
+              mapping: "$."

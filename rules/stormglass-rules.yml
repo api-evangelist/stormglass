@@ -1,0 +1,90 @@
+extends: spectral:oas
+rules:
+  stormglass-coordinate-params-required:
+    description: All point endpoints must require lat and lng query parameters
+    message: "Point endpoint '{{path}}' must have required 'lat' and 'lng' query parameters"
+    severity: error
+    given: "$.paths[?(@property.match(/\\/point$/))].get.parameters[?(@.in == 'query')]"
+    then:
+      field: required
+      function: truthy
+
+  stormglass-api-key-auth:
+    description: All operations must use API key authentication via Authorization header
+    message: "Operations must declare apiKeyAuth security scheme"
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: security
+      function: defined
+
+  stormglass-response-meta-object:
+    description: All 200 responses should include a meta object with quota information
+    message: "Response schema should include a 'meta' property with quota information"
+    severity: warn
+    given: "$.paths.*.get.responses.200.content.application/json.schema"
+    then:
+      field: properties.meta
+      function: defined
+
+  stormglass-params-description:
+    description: All query parameters must have descriptions
+    message: "Query parameter '{{property}}' must have a description"
+    severity: warn
+    given: "$.paths.*.*.parameters[?(@.in == 'query')]"
+    then:
+      field: description
+      function: truthy
+
+  stormglass-v2-paths:
+    description: All API paths should be versioned under /v2 (enforced at server level)
+    message: "Server URL should reference /v2 base path"
+    severity: info
+    given: "$.servers[*]"
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.stormglass\\.io/v2"
+
+  stormglass-https-only:
+    description: All server URLs must use HTTPS
+    message: "Server URL '{{value}}' must use HTTPS"
+    severity: error
+    given: "$.servers[*]"
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  stormglass-tags-defined:
+    description: All operations must have at least one tag
+    message: "Operation at '{{path}}' must include at least one tag"
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  stormglass-operation-ids:
+    description: All operations must have an operationId
+    message: "Operation at '{{path}}' must have an operationId"
+    severity: error
+    given: "$.paths.*.*"
+    then:
+      field: operationId
+      function: truthy
+
+  stormglass-operation-summary:
+    description: All operations must have a summary
+    message: "Operation at '{{path}}' must have a summary"
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: summary
+      function: truthy

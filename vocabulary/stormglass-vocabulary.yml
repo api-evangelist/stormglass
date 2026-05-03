@@ -1,0 +1,249 @@
+vocabulary:
+  name: Stormglass API Vocabulary
+  description: >-
+    Domain vocabulary for the Stormglass marine and weather API, covering
+    meteorological parameters, oceanographic measurements, tidal concepts,
+    and astronomical terms used across the API.
+  version: '1.0'
+  created: '2026-05-02'
+  modified: '2026-05-02'
+
+domains:
+  - name: Weather
+    description: Atmospheric weather measurement concepts
+    terms:
+      - term: airTemperature
+        definition: >-
+          Temperature of the air measured in degrees Celsius at standard
+          meteorological height (approximately 2 meters above ground).
+        unit: degrees Celsius
+        aliases: [temperature, air_temp, temp]
+      - term: windSpeed
+        definition: >-
+          Speed of horizontal air movement at 10 meters above sea level,
+          measured in meters per second.
+        unit: m/s
+        aliases: [wind_speed, wind]
+      - term: windDirection
+        definition: >-
+          Compass direction from which the wind originates, in degrees.
+          0 degrees indicates wind coming from the north; 90 east; 180 south; 270 west.
+        unit: degrees
+        aliases: [wind_dir]
+      - term: gust
+        definition: >-
+          Short-duration peak wind speed exceeding average wind speed by at
+          least 5 m/s, measured in meters per second.
+        unit: m/s
+      - term: humidity
+        definition: Relative humidity of the air, expressed as a percentage.
+        unit: percent
+      - term: pressure
+        definition: Atmospheric pressure at sea level in hectopascals (hPa).
+        unit: hPa
+        aliases: [atmospheric_pressure, barometric_pressure]
+      - term: cloudCover
+        definition: Total fraction of the sky covered by clouds, expressed as a percentage.
+        unit: percent
+      - term: precipitation
+        definition: >-
+          Mean rate of precipitation (rain, snow, etc.) in kilograms per square
+          meter per hour, equivalent to millimeters per hour.
+        unit: kg/m2/h
+        aliases: [rainfall, rain]
+      - term: visibility
+        definition: Horizontal visibility in kilometers.
+        unit: km
+
+  - name: Marine
+    description: Ocean and marine environment measurement concepts
+    terms:
+      - term: waveHeight
+        definition: >-
+          Significant height of combined wind and swell waves in meters.
+          Defined as the average height of the highest one-third of waves.
+        unit: meters
+        aliases: [significant_wave_height, Hs]
+      - term: waveDirection
+        definition: >-
+          Direction from which combined wind and swell waves are traveling,
+          in degrees. 0 degrees indicates waves coming from the north.
+        unit: degrees
+      - term: wavePeriod
+        definition: >-
+          Average period of combined wind and swell waves in seconds.
+          Represents the time between successive wave crests.
+        unit: seconds
+      - term: swellHeight
+        definition: Height of swell waves (remotely generated wind waves) in meters.
+        unit: meters
+      - term: swellDirection
+        definition: >-
+          Direction from which swell waves are traveling, in degrees.
+          0 degrees indicates swell coming from the north.
+        unit: degrees
+      - term: swellPeriod
+        definition: Period of swell waves in seconds.
+        unit: seconds
+      - term: waterTemperature
+        definition: Temperature of the sea surface water in degrees Celsius.
+        unit: degrees Celsius
+        aliases: [sea_surface_temperature, SST]
+      - term: currentSpeed
+        definition: Speed of ocean surface current in meters per second.
+        unit: m/s
+      - term: currentDirection
+        definition: >-
+          Direction toward which the ocean current is flowing, in degrees.
+          0 degrees indicates current flowing toward the north.
+        unit: degrees
+      - term: seaLevel
+        definition: Sea surface height relative to Mean Sea Level (MSL) in meters.
+        unit: meters
+
+  - name: Tides
+    description: Tidal measurement and prediction concepts
+    terms:
+      - term: tideExtreme
+        definition: >-
+          A high tide or low tide event representing a local maximum or minimum
+          in sea level during a tidal cycle.
+      - term: tideHigh
+        definition: >-
+          A local maximum in sea level during a tidal cycle, also called a
+          high water mark.
+        aliases: [high_tide, high_water]
+      - term: tideLow
+        definition: >-
+          A local minimum in sea level during a tidal cycle, also called a
+          low water mark.
+        aliases: [low_tide, low_water]
+      - term: datum
+        definition: >-
+          The reference level from which tidal heights are measured.
+          Common datums are Mean Sea Level (MSL) and Mean Lower Low Water (MLLW).
+        values: [MSL, MLLW]
+      - term: MSL
+        definition: >-
+          Mean Sea Level. The average height of the sea surface over a long
+          period, used as a standard reference for tidal measurements.
+      - term: MLLW
+        definition: >-
+          Mean Lower Low Water. The average of the lower low water heights
+          of each tidal day, used as the chart datum in the United States.
+      - term: tideStation
+        definition: >-
+          A monitoring location with instruments that measure sea level and
+          tidal cycles. Stormglass uses nearby stations to provide tide predictions.
+
+  - name: Astronomy
+    description: Solar and lunar astronomical measurement concepts
+    terms:
+      - term: sunrise
+        definition: >-
+          The time when the upper edge of the Sun first becomes visible above
+          the horizon in the morning, reported in UTC.
+      - term: sunset
+        definition: >-
+          The time when the Sun disappears below the horizon in the evening,
+          reported in UTC.
+      - term: moonrise
+        definition: Time when the Moon rises above the horizon, reported in UTC.
+      - term: moonset
+        definition: Time when the Moon sets below the horizon, reported in UTC.
+      - term: moonFraction
+        definition: >-
+          The fraction of the Moon's disk that is illuminated as seen from Earth,
+          expressed as a decimal between 0 (new moon) and 1 (full moon).
+      - term: moonPhase
+        definition: >-
+          The current phase of the Moon in its monthly cycle, described both
+          numerically (0.0-1.0) and textually (New Moon, Waxing Crescent, etc.)
+      - term: civilDawn
+        definition: >-
+          The time when the center of the Sun is 6 degrees below the horizon
+          in the morning. At civil dawn, there is enough light for outdoor activities.
+      - term: civilDusk
+        definition: >-
+          The time when the center of the Sun is 6 degrees below the horizon
+          in the evening. Civil dusk is the end of civil twilight.
+      - term: nauticalDawn
+        definition: >-
+          The time when the center of the Sun is 12 degrees below the horizon
+          in the morning. Nautical dawn marks the beginning of nautical twilight.
+      - term: astronomicalDawn
+        definition: >-
+          The time when the center of the Sun is 18 degrees below the horizon
+          in the morning. This marks the beginning of astronomical twilight.
+      - term: uvIndex
+        definition: >-
+          A measure of the UV radiation intensity at the Earth's surface.
+          Values range from 0 (no UV) to 11+ (extreme UV).
+
+  - name: Bio
+    description: Biological and oceanographic data concepts
+    terms:
+      - term: chlorophyll
+        definition: >-
+          Mass concentration of chlorophyll-a in sea water, an indicator of
+          phytoplankton density and ocean productivity.
+        unit: mg/m3
+      - term: oxygen
+        definition: >-
+          Mole concentration of dissolved molecular oxygen in sea water.
+          Important for marine life sustainability.
+        unit: mmol/m3
+      - term: salinity
+        definition: >-
+          Sea water salinity expressed in practical salinity units (PSU) or per mille.
+          Typical ocean salinity is around 35 PSU.
+        unit: PSU
+      - term: ph
+        definition: >-
+          Sea water pH reported on the total scale. Ocean acidification is
+          lowering pH from the historical value of approximately 8.2.
+      - term: phytoplankton
+        definition: >-
+          Microscopic photosynthetic organisms in the ocean that form the base
+          of marine food chains and produce oxygen.
+
+  - name: Elevation
+    description: Topographic and bathymetric elevation concepts
+    terms:
+      - term: elevation
+        definition: >-
+          Height above or depth below sea level in meters. Positive values
+          indicate land elevation; negative values indicate ocean depth (bathymetry).
+        unit: meters
+      - term: bathymetry
+        definition: >-
+          Measurement of water depth in oceans, seas, and lakes. Equivalent
+          to underwater topography.
+
+  - name: DataSources
+    description: Weather and oceanographic data sources aggregated by Stormglass
+    terms:
+      - term: sg
+        definition: Stormglass composite value, blending data from multiple sources
+      - term: noaa
+        definition: National Oceanic and Atmospheric Administration (United States)
+      - term: dwd
+        definition: Deutscher Wetterdienst, the German Weather Service
+      - term: icon
+        definition: ICON numerical weather prediction model operated by DWD
+      - term: meto
+        definition: UK Met Office
+      - term: ecmwf
+        definition: >-
+          European Centre for Medium-Range Weather Forecasts, an international
+          organization providing global weather forecast data
+      - term: fcoo
+        definition: Royal Danish Navy's Hydrographic Service
+      - term: fmi
+        definition: Finnish Meteorological Institute
+      - term: yr
+        definition: >-
+          Yr.no, a joint service by the Norwegian Meteorological Institute
+          and the Norwegian Broadcasting Corporation
+      - term: smhi
+        definition: Swedish Meteorological and Hydrological Institute

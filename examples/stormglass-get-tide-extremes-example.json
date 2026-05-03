@@ -1,0 +1,53 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.stormglass.io/v2/tide/extremes?lat=58.7984&lng=17.8081&start=2022-02-01&end=2022-02-02",
+    "headers": {
+      "Authorization": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "height": 0.35,
+          "time": "2022-02-01T02:30:00+00:00",
+          "type": "low"
+        },
+        {
+          "height": 0.68,
+          "time": "2022-02-01T08:45:00+00:00",
+          "type": "high"
+        },
+        {
+          "height": 0.28,
+          "time": "2022-02-01T15:10:00+00:00",
+          "type": "low"
+        },
+        {
+          "height": 0.72,
+          "time": "2022-02-01T21:30:00+00:00",
+          "type": "high"
+        }
+      ],
+      "meta": {
+        "cost": 1,
+        "dailyQuota": 10,
+        "datum": "MSL",
+        "end": "2022-02-02 00:00",
+        "lat": 58.7984,
+        "lng": 17.8081,
+        "requestCount": 2,
+        "start": "2022-02-01 00:00",
+        "station": {
+          "distance": 12,
+          "lat": 58.81,
+          "lng": 17.75,
+          "name": "Oxelosund",
+          "source": "SMHI"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.stormglass.io/v2/weather/point?lat=58.7984&lng=17.8081&params=waveHeight,waterTemperature,windSpeed,airTemperature&start=1643673600&end=1643760000",
+    "headers": {
+      "Authorization": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "hours": [
+        {
+          "time": "2022-02-01T00:00:00+00:00",
+          "airTemperature": {
+            "dwd": 3.91,
+            "icon": 3.59,
+            "noaa": 4.12,
+            "sg": 3.87
+          },
+          "waveHeight": {
+            "icon": 0.54,
+            "noaa": 0.49,
+            "sg": 0.51
+          },
+          "waterTemperature": {
+            "meto": 4.2,
+            "noaa": 4.18,
+            "sg": 4.19
+          },
+          "windSpeed": {
+            "dwd": 5.74,
+            "icon": 5.68,
+            "noaa": 5.84,
+            "sg": 5.75
+          }
+        },
+        {
+          "time": "2022-02-01T01:00:00+00:00",
+          "airTemperature": {
+            "dwd": 3.85,
+            "icon": 3.52,
+            "noaa": 4.05,
+            "sg": 3.80
+          },
+          "waveHeight": {
+            "icon": 0.52,
+            "noaa": 0.48,
+            "sg": 0.50
+          },
+          "waterTemperature": {
+            "meto": 4.2,
+            "noaa": 4.18,
+            "sg": 4.19
+          },
+          "windSpeed": {
+            "dwd": 5.60,
+            "icon": 5.55,
+            "noaa": 5.70,
+            "sg": 5.62
+          }
+        }
+      ],
+      "meta": {
+        "cost": 1,
+        "dailyQuota": 10,
+        "end": "2022-02-01 08:00",
+        "lat": 58.7984,
+        "lng": 17.8081,
+        "params": ["airTemperature", "waveHeight", "waterTemperature", "windSpeed"],
+        "requestCount": 1,
+        "start": "2022-02-01 00:00"
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/stormglass/json-schema/stormglass-weather-point-schema.json",
+  "title": "Weather Point Response",
+  "description": "Schema for the Stormglass API weather point response. Contains hourly weather data from multiple sources and request metadata.",
+  "type": "object",
+  "properties": {
+    "hours": {
+      "type": "array",
+      "description": "Array of hourly weather data points",
+      "items": {
+        "$ref": "#/$defs/WeatherHour"
+      }
+    },
+    "meta": {
+      "$ref": "#/$defs/MetaData"
+    }
+  },
+  "required": ["hours", "meta"],
+  "$defs": {
+    "SourceValue": {
+      "type": "object",
+      "description": "A weather parameter value from one or more data sources. Each key is a source abbreviation (e.g. noaa, dwd, sg).",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "WeatherHour": {
+      "type": "object",
+      "description": "Hourly weather data for a single time interval",
+      "required": ["time"],
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp in UTC for this data point"
+        },
+        "airTemperature": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Air temperature in degrees Celsius"
+        },
+        "windSpeed": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Speed of wind at 10m above sea level in meters per second"
+        },
+        "windDirection": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Direction of wind at 10m above sea level. 0 degrees indicates wind coming from north."
+        },
+        "gust": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Wind gust in meters per second"
+        },
+        "humidity": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Relative humidity in percent"
+        },
+        "pressure": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Air pressure at sea level in hPa"
+        },
+        "cloudCover": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Total cloud coverage in percent"
+        },
+        "precipitation": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Mean precipitation in kg/m2/h (equivalent to mm/h)"
+        },
+        "waveHeight": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Significant height of combined wind and swell waves in meters"
+        },
+        "waveDirection": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Direction of combined wind and swell waves. 0 degrees indicates waves coming from north."
+        },
+        "wavePeriod": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Period of combined wind and swell waves in seconds"
+        },
+        "swellHeight": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Height of swell waves in meters"
+        },
+        "swellDirection": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Direction of swell waves. 0 degrees indicates swell coming from north."
+        },
+        "swellPeriod": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Period of swell waves in seconds"
+        },
+        "waterTemperature": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Water temperature in degrees Celsius"
+        },
+        "currentSpeed": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Speed of ocean current in meters per second"
+        },
+        "currentDirection": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Direction of ocean current. 0 degrees indicates current coming from north."
+        },
+        "visibility": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Horizontal visibility in km"
+        },
+        "seaLevel": {
+          "$ref": "#/$defs/SourceValue",
+          "description": "Sea level relative to Mean Sea Level in meters"
+        }
+      }
+    },
+    "MetaData": {
+      "type": "object",
+      "description": "Metadata about the API request including quota information",
+      "required": ["cost", "dailyQuota", "requestCount", "lat", "lng"],
+      "properties": {
+        "cost": {
+          "type": "integer",
+          "description": "Number of API credits consumed by this request"
+        },
+        "dailyQuota": {
+          "type": "integer",
+          "description": "Your daily API call quota"
+        },
+        "requestCount": {
+          "type": "integer",
+          "description": "Total number of API calls made today"
+        },
+        "lat": {
+          "type": "number",
+          "description": "Latitude of the requested coordinate"
+        },
+        "lng": {
+          "type": "number",
+          "description": "Longitude of the requested coordinate"
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of parameters returned"
+        },
+        "start": {
+          "type": "string",
+          "description": "Start timestamp of the returned data"
+        },
+        "end": {
+          "type": "string",
+          "description": "End timestamp of the returned data"
+        }
+      }
+    }
+  }
+}

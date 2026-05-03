@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/stormglass/json-schema/stormglass-tide-extremes-schema.json",
+  "title": "Tide Extremes Response",
+  "description": "Schema for the Stormglass API tide extremes response. Contains high and low tide events with timestamps and heights.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of tide extreme events in the requested time range",
+      "items": {
+        "$ref": "#/$defs/TideExtremePoint"
+      }
+    },
+    "meta": {
+      "$ref": "#/$defs/TideMetaData"
+    }
+  },
+  "required": ["data", "meta"],
+  "$defs": {
+    "TideExtremePoint": {
+      "type": "object",
+      "description": "A single tide extreme (high or low) event",
+      "required": ["height", "time", "type"],
+      "properties": {
+        "height": {
+          "type": "number",
+          "description": "Tide height in meters relative to the specified datum"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp in UTC when this tide extreme occurs"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["low", "high"],
+          "description": "Whether this is a high tide or low tide event"
+        }
+      }
+    },
+    "TideStation": {
+      "type": "object",
+      "description": "Information about the tide station used for calculations",
+      "properties": {
+        "distance": {
+          "type": "integer",
+          "description": "Distance between the tide station and the requested coordinate in km"
+        },
+        "lat": {
+          "type": "number",
+          "description": "Latitude of the tide station"
+        },
+        "lng": {
+          "type": "number",
+          "description": "Longitude of the tide station"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the tide station"
+        },
+        "source": {
+          "type": "string",
+          "description": "Organization that operates the tide station"
+        }
+      }
+    },
+    "TideMetaData": {
+      "type": "object",
+      "description": "Metadata about the tide request including station information and quota",
+      "required": ["cost", "dailyQuota", "requestCount", "lat", "lng"],
+      "properties": {
+        "cost": {
+          "type": "integer",
+          "description": "Number of API credits consumed"
+        },
+        "dailyQuota": {
+          "type": "integer",
+          "description": "Daily API call quota"
+        },
+        "datum": {
+          "type": "string",
+          "enum": ["MLLW", "MSL"],
+          "description": "The datum used for tidal measurements"
+        },
+        "end": {
+          "type": "string",
+          "description": "End timestamp of the requested data range"
+        },
+        "lat": {
+          "type": "number",
+          "description": "Requested latitude"
+        },
+        "lng": {
+          "type": "number",
+          "description": "Requested longitude"
+        },
+        "requestCount": {
+          "type": "integer",
+          "description": "Total number of API calls made today"
+        },
+        "start": {
+          "type": "string",
+          "description": "Start timestamp of the requested data range"
+        },
+        "station": {
+          "$ref": "#/$defs/TideStation"
+        }
+      }
+    }
+  }
+}

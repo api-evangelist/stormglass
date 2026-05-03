@@ -1,0 +1,51 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.stormglass.io/v2/astronomy/point?lat=58.7984&lng=17.8081&start=2022-02-01&end=2022-02-02",
+    "headers": {
+      "Authorization": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "astronomicalDawn": "2022-02-01T05:52:00+00:00",
+          "astronomicalDusk": "2022-02-01T16:38:00+00:00",
+          "civilDawn": "2022-02-01T07:12:00+00:00",
+          "civilDusk": "2022-02-01T15:18:00+00:00",
+          "moonFraction": 0.92,
+          "moonPhase": {
+            "closest": {
+              "text": "Full moon",
+              "time": "2022-02-16T16:59:00+00:00",
+              "value": 1.0
+            },
+            "current": {
+              "text": "Waxing gibbous",
+              "time": "2022-02-01T12:00:00+00:00",
+              "value": 0.72
+            }
+          },
+          "moonrise": "2022-02-01T13:45:00+00:00",
+          "moonset": "2022-02-01T03:20:00+00:00",
+          "nauticalDawn": "2022-02-01T06:34:00+00:00",
+          "nauticalDusk": "2022-02-01T15:56:00+00:00",
+          "sunrise": "2022-02-01T07:52:00+00:00",
+          "sunset": "2022-02-01T14:38:00+00:00",
+          "time": "2022-02-01T00:00:00+00:00"
+        }
+      ],
+      "meta": {
+        "cost": 1,
+        "dailyQuota": 10,
+        "lat": 58.7984,
+        "lng": 17.8081,
+        "requestCount": 3,
+        "start": "2022-02-01 00:00",
+        "end": "2022-02-02 00:00"
+      }
+    }
+  }
+}

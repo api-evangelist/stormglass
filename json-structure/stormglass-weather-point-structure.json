@@ -1,0 +1,67 @@
+{
+  "title": "Stormglass Weather Point Structure",
+  "description": "JSON structure documentation for the Stormglass weather point API response",
+  "type": "object",
+  "fields": [
+    {
+      "name": "hours",
+      "type": "array",
+      "description": "Hourly forecast data array",
+      "items": {
+        "type": "object",
+        "fields": [
+          { "name": "time", "type": "string", "format": "date-time", "description": "Timestamp in UTC" },
+          { "name": "airTemperature", "type": "object", "description": "Air temperature in Celsius, keyed by data source" },
+          { "name": "windSpeed", "type": "object", "description": "Wind speed in m/s at 10m height, keyed by source" },
+          { "name": "windDirection", "type": "object", "description": "Wind direction in degrees (0=N), keyed by source" },
+          { "name": "gust", "type": "object", "description": "Wind gust in m/s, keyed by source" },
+          { "name": "humidity", "type": "object", "description": "Relative humidity in percent, keyed by source" },
+          { "name": "pressure", "type": "object", "description": "Air pressure in hPa, keyed by source" },
+          { "name": "cloudCover", "type": "object", "description": "Cloud cover in percent, keyed by source" },
+          { "name": "precipitation", "type": "object", "description": "Precipitation in mm/h, keyed by source" },
+          { "name": "waveHeight", "type": "object", "description": "Significant wave height in meters, keyed by source" },
+          { "name": "waveDirection", "type": "object", "description": "Wave direction in degrees, keyed by source" },
+          { "name": "wavePeriod", "type": "object", "description": "Wave period in seconds, keyed by source" },
+          { "name": "swellHeight", "type": "object", "description": "Swell height in meters, keyed by source" },
+          { "name": "swellDirection", "type": "object", "description": "Swell direction in degrees, keyed by source" },
+          { "name": "swellPeriod", "type": "object", "description": "Swell period in seconds, keyed by source" },
+          { "name": "waterTemperature", "type": "object", "description": "Water temperature in Celsius, keyed by source" },
+          { "name": "currentSpeed", "type": "object", "description": "Ocean current speed in m/s, keyed by source" },
+          { "name": "currentDirection", "type": "object", "description": "Ocean current direction in degrees, keyed by source" },
+          { "name": "visibility", "type": "object", "description": "Horizontal visibility in km, keyed by source" },
+          { "name": "seaLevel", "type": "object", "description": "Sea level relative to MSL in meters, keyed by source" }
+        ]
+      }
+    },
+    {
+      "name": "meta",
+      "type": "object",
+      "description": "Request metadata and quota information",
+      "fields": [
+        { "name": "cost", "type": "integer", "description": "API credits consumed" },
+        { "name": "dailyQuota", "type": "integer", "description": "Daily request quota" },
+        { "name": "requestCount", "type": "integer", "description": "Requests made today" },
+        { "name": "lat", "type": "number", "description": "Requested latitude" },
+        { "name": "lng", "type": "number", "description": "Requested longitude" },
+        { "name": "params", "type": "array", "description": "Parameters returned" },
+        { "name": "start", "type": "string", "description": "Data start timestamp" },
+        { "name": "end", "type": "string", "description": "Data end timestamp" }
+      ]
+    }
+  ],
+  "sources": {
+    "description": "Data source abbreviations used as keys in parameter objects",
+    "values": {
+      "sg": "Stormglass composite value",
+      "noaa": "National Oceanic and Atmospheric Administration",
+      "dwd": "Deutscher Wetterdienst (German Weather Service)",
+      "icon": "ICON model (DWD)",
+      "meto": "UK Met Office",
+      "ecmwf": "European Centre for Medium-Range Weather Forecasts",
+      "fcoo": "Royal Danish Navy",
+      "fmi": "Finnish Meteorological Institute",
+      "yr": "Norwegian Meteorological Institute",
+      "smhi": "Swedish Meteorological and Hydrological Institute"
+    }
+  }
+}
