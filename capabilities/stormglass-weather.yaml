@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stormglass API — Weather
+  description: 'Stormglass API — Weather. 1 operations. Lead operation: Get Weather Point Forecast. Self-contained Naftiko
+    capability covering one Stormglass business surface.'
+  tags:
+  - Stormglass
+  - Weather
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STORMGLASS_API_KEY: STORMGLASS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stormglass-weather
+    baseUri: https://api.stormglass.io/v2
+    description: Stormglass API — Weather business capability. Self-contained, no shared references.
+    resources:
+    - name: weather-point
+      path: /weather/point
+      operations:
+      - name: getweatherpoint
+        method: GET
+        description: Get Weather Point Forecast
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+        - name: params
+          in: query
+          type: string
+          description: Comma-separated list of parameters to retrieve. E.g. airTemperature,windSpeed,waveHeight
+          required: true
+        - name: start
+          in: query
+          type: string
+          description: Timestamp in UTC for first forecast hour. UNIX format or URL-encoded ISO format.
+        - name: end
+          in: query
+          type: string
+          description: Timestamp in UTC for last forecast hour. UNIX format or URL-encoded ISO format.
+        - name: source
+          in: query
+          type: string
+          description: Specify a single source or comma-separated list of sources. E.g. noaa or dwd,noaa
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STORMGLASS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stormglass-weather-rest
+    port: 8080
+    description: REST adapter for Stormglass API — Weather. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/weather/point
+      name: weather-point
+      description: REST surface for weather-point.
+      operations:
+      - method: GET
+        name: getweatherpoint
+        description: Get Weather Point Forecast
+        call: stormglass-weather.getweatherpoint
+        with:
+          lat: rest.lat
+          lng: rest.lng
+          params: rest.params
+          start: rest.start
+          end: rest.end
+          source: rest.source
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stormglass-weather-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stormglass API — Weather. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-weather-point-forecast
+      description: Get Weather Point Forecast
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-weather.getweatherpoint
+      with:
+        lat: tools.lat
+        lng: tools.lng
+        params: tools.params
+        start: tools.start
+        end: tools.end
+        source: tools.source
+      outputParameters:
+      - type: object
+        mapping: $.

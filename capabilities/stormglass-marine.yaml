@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stormglass API — Marine
+  description: 'Stormglass API — Marine. 1 operations. Lead operation: Get Marine Point Data. Self-contained Naftiko capability
+    covering one Stormglass business surface.'
+  tags:
+  - Stormglass
+  - Marine
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STORMGLASS_API_KEY: STORMGLASS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stormglass-marine
+    baseUri: https://api.stormglass.io/v2
+    description: Stormglass API — Marine business capability. Self-contained, no shared references.
+    resources:
+    - name: marine-point
+      path: /marine/point
+      operations:
+      - name: getmarinepoint
+        method: GET
+        description: Get Marine Point Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+        - name: params
+          in: query
+          type: string
+          description: Comma-separated list of marine parameters to retrieve
+          required: true
+        - name: start
+          in: query
+          type: string
+          description: Timestamp in UTC for first forecast hour
+        - name: end
+          in: query
+          type: string
+          description: Timestamp in UTC for last forecast hour
+        - name: source
+          in: query
+          type: string
+          description: Specify a single source or comma-separated list of sources
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STORMGLASS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stormglass-marine-rest
+    port: 8080
+    description: REST adapter for Stormglass API — Marine. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/marine/point
+      name: marine-point
+      description: REST surface for marine-point.
+      operations:
+      - method: GET
+        name: getmarinepoint
+        description: Get Marine Point Data
+        call: stormglass-marine.getmarinepoint
+        with:
+          lat: rest.lat
+          lng: rest.lng
+          params: rest.params
+          start: rest.start
+          end: rest.end
+          source: rest.source
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stormglass-marine-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stormglass API — Marine. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-marine-point-data
+      description: Get Marine Point Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-marine.getmarinepoint
+      with:
+        lat: tools.lat
+        lng: tools.lng
+        params: tools.params
+        start: tools.start
+        end: tools.end
+        source: tools.source
+      outputParameters:
+      - type: object
+        mapping: $.

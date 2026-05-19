@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stormglass API — Bio
+  description: 'Stormglass API — Bio. 1 operations. Lead operation: Get Bio Point Data. Self-contained Naftiko capability
+    covering one Stormglass business surface.'
+  tags:
+  - Stormglass
+  - Bio
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STORMGLASS_API_KEY: STORMGLASS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stormglass-bio
+    baseUri: https://api.stormglass.io/v2
+    description: Stormglass API — Bio business capability. Self-contained, no shared references.
+    resources:
+    - name: bio-point
+      path: /bio/point
+      operations:
+      - name: getbiopoint
+        method: GET
+        description: Get Bio Point Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+        - name: params
+          in: query
+          type: string
+          description: Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity
+          required: true
+        - name: start
+          in: query
+          type: string
+          description: Timestamp in UTC for first data hour
+        - name: end
+          in: query
+          type: string
+          description: Timestamp in UTC for last data hour
+        - name: source
+          in: query
+          type: string
+          description: Specify a single source or comma-separated list of sources
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STORMGLASS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stormglass-bio-rest
+    port: 8080
+    description: REST adapter for Stormglass API — Bio. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/bio/point
+      name: bio-point
+      description: REST surface for bio-point.
+      operations:
+      - method: GET
+        name: getbiopoint
+        description: Get Bio Point Data
+        call: stormglass-bio.getbiopoint
+        with:
+          lat: rest.lat
+          lng: rest.lng
+          params: rest.params
+          start: rest.start
+          end: rest.end
+          source: rest.source
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stormglass-bio-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stormglass API — Bio. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-bio-point-data
+      description: Get Bio Point Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-bio.getbiopoint
+      with:
+        lat: tools.lat
+        lng: tools.lng
+        params: tools.params
+        start: tools.start
+        end: tools.end
+        source: tools.source
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stormglass API — Elevation
+  description: 'Stormglass API — Elevation. 1 operations. Lead operation: Get Elevation Point Data. Self-contained Naftiko
+    capability covering one Stormglass business surface.'
+  tags:
+  - Stormglass
+  - Elevation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STORMGLASS_API_KEY: STORMGLASS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stormglass-elevation
+    baseUri: https://api.stormglass.io/v2
+    description: Stormglass API — Elevation business capability. Self-contained, no shared references.
+    resources:
+    - name: elevation-point
+      path: /elevation/point
+      operations:
+      - name: getelevationpoint
+        method: GET
+        description: Get Elevation Point Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STORMGLASS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stormglass-elevation-rest
+    port: 8080
+    description: REST adapter for Stormglass API — Elevation. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/elevation/point
+      name: elevation-point
+      description: REST surface for elevation-point.
+      operations:
+      - method: GET
+        name: getelevationpoint
+        description: Get Elevation Point Data
+        call: stormglass-elevation.getelevationpoint
+        with:
+          lat: rest.lat
+          lng: rest.lng
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stormglass-elevation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stormglass API — Elevation. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-elevation-point-data
+      description: Get Elevation Point Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-elevation.getelevationpoint
+      with:
+        lat: tools.lat
+        lng: tools.lng
+      outputParameters:
+      - type: object
+        mapping: $.

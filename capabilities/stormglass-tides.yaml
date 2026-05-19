@@ -1,0 +1,248 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stormglass API — Tides
+  description: 'Stormglass API — Tides. 4 operations. Lead operation: Get Tide Extremes. Self-contained Naftiko capability
+    covering one Stormglass business surface.'
+  tags:
+  - Stormglass
+  - Tides
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STORMGLASS_API_KEY: STORMGLASS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stormglass-tides
+    baseUri: https://api.stormglass.io/v2
+    description: Stormglass API — Tides business capability. Self-contained, no shared references.
+    resources:
+    - name: tide-extremes
+      path: /tide/extremes
+      operations:
+      - name: gettideextremes
+        method: GET
+        description: Get Tide Extremes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+        - name: start
+          in: query
+          type: string
+          description: Timestamp in UTC for start of time range
+        - name: end
+          in: query
+          type: string
+          description: Timestamp in UTC for end of time range
+        - name: datum
+          in: query
+          type: string
+          description: Datum relative to which values will be reported. Either MLLW or MSL.
+    - name: tide-sea-level
+      path: /tide/sea-level
+      operations:
+      - name: gettidesealevel
+        method: GET
+        description: Get Tide Sea Level
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+        - name: start
+          in: query
+          type: string
+          description: Timestamp in UTC for start of time range
+        - name: end
+          in: query
+          type: string
+          description: Timestamp in UTC for end of time range
+        - name: datum
+          in: query
+          type: string
+          description: Datum relative to which values will be reported
+    - name: tide-stations
+      path: /tide/stations
+      operations:
+      - name: gettidestations
+        method: GET
+        description: List Tide Stations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tide-stations-area
+      path: /tide/stations/area
+      operations:
+      - name: gettidestationsarea
+        method: GET
+        description: List Tide Stations for Area
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: box
+          in: query
+          type: string
+          description: 'Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng'
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STORMGLASS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stormglass-tides-rest
+    port: 8080
+    description: REST adapter for Stormglass API — Tides. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tide/extremes
+      name: tide-extremes
+      description: REST surface for tide-extremes.
+      operations:
+      - method: GET
+        name: gettideextremes
+        description: Get Tide Extremes
+        call: stormglass-tides.gettideextremes
+        with:
+          lat: rest.lat
+          lng: rest.lng
+          start: rest.start
+          end: rest.end
+          datum: rest.datum
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tide/sea-level
+      name: tide-sea-level
+      description: REST surface for tide-sea-level.
+      operations:
+      - method: GET
+        name: gettidesealevel
+        description: Get Tide Sea Level
+        call: stormglass-tides.gettidesealevel
+        with:
+          lat: rest.lat
+          lng: rest.lng
+          start: rest.start
+          end: rest.end
+          datum: rest.datum
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tide/stations
+      name: tide-stations
+      description: REST surface for tide-stations.
+      operations:
+      - method: GET
+        name: gettidestations
+        description: List Tide Stations
+        call: stormglass-tides.gettidestations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tide/stations/area
+      name: tide-stations-area
+      description: REST surface for tide-stations-area.
+      operations:
+      - method: GET
+        name: gettidestationsarea
+        description: List Tide Stations for Area
+        call: stormglass-tides.gettidestationsarea
+        with:
+          box: rest.box
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stormglass-tides-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stormglass API — Tides. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-tide-extremes
+      description: Get Tide Extremes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-tides.gettideextremes
+      with:
+        lat: tools.lat
+        lng: tools.lng
+        start: tools.start
+        end: tools.end
+        datum: tools.datum
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tide-sea-level
+      description: Get Tide Sea Level
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-tides.gettidesealevel
+      with:
+        lat: tools.lat
+        lng: tools.lng
+        start: tools.start
+        end: tools.end
+        datum: tools.datum
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tide-stations
+      description: List Tide Stations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-tides.gettidestations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tide-stations-area
+      description: List Tide Stations for Area
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-tides.gettidestationsarea
+      with:
+        box: tools.box
+      outputParameters:
+      - type: object
+        mapping: $.

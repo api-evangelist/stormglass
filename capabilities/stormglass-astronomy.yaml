@@ -1,0 +1,101 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stormglass API — Astronomy
+  description: 'Stormglass API — Astronomy. 1 operations. Lead operation: Get Astronomy Point Data. Self-contained Naftiko
+    capability covering one Stormglass business surface.'
+  tags:
+  - Stormglass
+  - Astronomy
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STORMGLASS_API_KEY: STORMGLASS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stormglass-astronomy
+    baseUri: https://api.stormglass.io/v2
+    description: Stormglass API — Astronomy business capability. Self-contained, no shared references.
+    resources:
+    - name: astronomy-point
+      path: /astronomy/point
+      operations:
+      - name: getastronomypoint
+        method: GET
+        description: Get Astronomy Point Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude of the desired coordinate
+          required: true
+        - name: lng
+          in: query
+          type: number
+          description: Longitude of the desired coordinate
+          required: true
+        - name: start
+          in: query
+          type: string
+          description: Timestamp in UTC for start date
+        - name: end
+          in: query
+          type: string
+          description: Timestamp in UTC for end date
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STORMGLASS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stormglass-astronomy-rest
+    port: 8080
+    description: REST adapter for Stormglass API — Astronomy. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/astronomy/point
+      name: astronomy-point
+      description: REST surface for astronomy-point.
+      operations:
+      - method: GET
+        name: getastronomypoint
+        description: Get Astronomy Point Data
+        call: stormglass-astronomy.getastronomypoint
+        with:
+          lat: rest.lat
+          lng: rest.lng
+          start: rest.start
+          end: rest.end
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stormglass-astronomy-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stormglass API — Astronomy. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-astronomy-point-data
+      description: Get Astronomy Point Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stormglass-astronomy.getastronomypoint
+      with:
+        lat: tools.lat
+        lng: tools.lng
+        start: tools.start
+        end: tools.end
+      outputParameters:
+      - type: object
+        mapping: $.
