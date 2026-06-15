@@ -1,0 +1,448 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Weather",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Weather Point Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/weather/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of parameters to retrieve. E.g. airTemperature,windSpeed,waveHeight"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first forecast hour. UNIX format or URL-encoded ISO format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last forecast hour. UNIX format or URL-encoded ISO format."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources. E.g. noaa or dwd,noaa"
+              }
+            ]
+          },
+          "docs": "Retrieve hourly weather forecast data for a single coordinate. Returns atmospheric and marine weather parameters including temperature, wind, waves, swell, and precipitation from multiple data sources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Marine",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Marine Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/marine/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of marine parameters to retrieve"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first forecast hour"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last forecast hour"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources"
+              }
+            ]
+          },
+          "docs": "Retrieve hourly marine environment data for a single coordinate. Returns wave, swell, current, and water temperature parameters from multiple marine data sources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tides",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Tide Extremes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/extremes",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for start of time range"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for end of time range"
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Datum relative to which values will be reported. Either MLLW or MSL."
+              }
+            ]
+          },
+          "docs": "Retrieve information about high and low tide extremes for a single coordinate. Returns tide high and low events with timestamps and heights. If no datum is specified, values are relative to Mean Sea Level (MSL)."
+        },
+        {
+          "info": {
+            "name": "Get Tide Sea Level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/sea-level",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for start of time range"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for end of time range"
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Datum relative to which values will be reported"
+              }
+            ]
+          },
+          "docs": "Retrieve the sea level in meters on an hourly basis for a single coordinate. If no datum is specified, values are relative to Mean Sea Level (MSL)."
+        },
+        {
+          "info": {
+            "name": "List Tide Stations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/stations"
+          },
+          "docs": "Retrieve a list of all available tide stations. Returns station names, coordinates, and data sources."
+        },
+        {
+          "info": {
+            "name": "List Tide Stations for Area",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/stations/area",
+            "params": [
+              {
+                "name": "box",
+                "value": "",
+                "type": "query",
+                "description": "Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all tide stations within a defined geographic area defined by a bounding box."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Astronomy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Astronomy Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/astronomy/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for start date"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for end date"
+              }
+            ]
+          },
+          "docs": "Retrieve astronomical data for a single coordinate including sunrise, sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical dawn/dusk, and astronomical dawn/dusk."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Solar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Solar Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/solar/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of solar parameters. E.g. uvIndex,downwardShortWaveRadiationFlux"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first data hour"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last data hour"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources"
+              }
+            ]
+          },
+          "docs": "Retrieve solar radiation data for a single coordinate including UV index and downward short-wave radiation flux (GHI)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bio",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bio Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/bio/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first data hour"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last data hour"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources"
+              }
+            ]
+          },
+          "docs": "Retrieve biological and oceanographic data for a single coordinate including chlorophyll, nutrients, oxygen, salinity, phytoplankton, and soil moisture data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Elevation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Elevation Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/elevation/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              }
+            ]
+          },
+          "docs": "Retrieve elevation data for a single coordinate. Provides bathymetry for ocean coordinates and topography for land coordinates. Data is available globally."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

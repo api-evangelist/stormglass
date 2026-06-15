@@ -1,0 +1,2548 @@
+{
+  "item": [
+    {
+      "id": "167d1819-78df-4abc-8cbd-bf9b5dcbc85b",
+      "name": "Weather",
+      "description": {
+        "content": "Point weather forecasts and historical weather data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bdbebf5-54af-465a-b142-fad162230024",
+          "name": "Get Weather Point Forecast",
+          "request": {
+            "name": "Get Weather Point Forecast",
+            "description": {
+              "content": "Retrieve hourly weather forecast data for a single coordinate. Returns atmospheric and marine weather parameters including temperature, wind, waves, swell, and precipitation from multiple data sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "weather",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "params",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of parameters to retrieve. E.g. airTemperature,windSpeed,waveHeight"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for first forecast hour. UNIX format or URL-encoded ISO format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for last forecast hour. UNIX format or URL-encoded ISO format."
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Specify a single source or comma-separated list of sources. E.g. noaa or dwd,noaa"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93798a42-cada-4e10-81c0-7b275f105713",
+              "name": "Hourly weather data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hours\": [\n    {\n      \"time\": \"string\",\n      \"airTemperature\": {\n        \"key_0\": 4735.981220472187,\n        \"key_1\": 9629.545816044263\n      },\n      \"windSpeed\": {\n        \"key_0\": 1690.7522057464764,\n        \"key_1\": 3880.3735413440554\n      },\n      \"windDirection\": {\n        \"key_0\": 5162.945947298923\n      },\n      \"gust\": {\n        \"key_0\": 5639.022560391487,\n        \"key_1\": 3198.7984474061604,\n        \"key_2\": 7332.484657222705\n      },\n      \"humidity\": {\n        \"key_0\": 6133.720364408371\n      },\n      \"pressure\": {\n        \"key_0\": 6802.231667156413,\n        \"key_1\": 6586.911637117801\n      },\n      \"cloudCover\": {\n        \"key_0\": 5051.823440090127,\n        \"key_1\": 5194.764591824207,\n        \"key_2\": 2412.5820447346837,\n        \"key_3\": 9167.391776891602\n      },\n      \"precipitation\": {\n        \"key_0\": 8066.54187235363\n      },\n      \"waveHeight\": {\n        \"key_0\": 7139.690391233131\n      },\n      \"waveDirection\": {\n        \"key_0\": 8929.269403964789,\n        \"key_1\": 9635.125933861513\n      },\n      \"wavePeriod\": {\n        \"key_0\": 8874.418887967693\n      },\n      \"swellHeight\": {\n        \"key_0\": 8712.931113629582\n      },\n      \"swellDirection\": {\n        \"key_0\": 5018.195939878163,\n        \"key_1\": 7308.479274486392\n      },\n      \"swellPeriod\": {\n        \"key_0\": 8811.926557578448\n      },\n      \"waterTemperature\": {\n        \"key_0\": 1659.6320379526885,\n        \"key_1\": 5463.635252884329,\n        \"key_2\": 6247.327249043069,\n        \"key_3\": 2652.143154000831\n      },\n      \"currentSpeed\": {\n        \"key_0\": 8872.40269327751\n      },\n      \"currentDirection\": {\n        \"key_0\": 1729.3591598239655\n      },\n      \"visibility\": {\n        \"key_0\": 7014.1470054528\n      },\n      \"seaLevel\": {\n        \"key_0\": 9570.794828755106,\n        \"key_1\": 4201.017396355157\n      }\n    },\n    {\n      \"time\": \"string\",\n      \"airTemperature\": {\n        \"key_0\": 7898.247805095825\n      },\n      \"windSpeed\": {\n        \"key_0\": 121.06244338402905,\n        \"key_1\": 9096.241284147414\n      },\n      \"windDirection\": {\n        \"key_0\": 1529.1040075146134\n      },\n      \"gust\": {\n        \"key_0\": 513.970064757261,\n        \"key_1\": 53.89347373155884\n      },\n      \"humidity\": {\n        \"key_0\": 332.0357373158878\n      },\n      \"pressure\": {\n        \"key_0\": 1170.4478776149608,\n        \"key_1\": 5957.442074587415\n      },\n      \"cloudCover\": {\n        \"key_0\": 5755.4116611949175\n      },\n      \"precipitation\": {\n        \"key_0\": 8134.005018124481\n      },\n      \"waveHeight\": {\n        \"key_0\": 4491.578326665923,\n        \"key_1\": 5691.2384935751925,\n        \"key_2\": 2458.2203046425066,\n        \"key_3\": 3518.763929469415\n      },\n      \"waveDirection\": {\n        \"key_0\": 2484.872016278934,\n        \"key_1\": 2678.5137190897967,\n        \"key_2\": 5085.226871669673,\n        \"key_3\": 8647.223136811555\n      },\n      \"wavePeriod\": {\n        \"key_0\": 3755.807209739591\n      },\n      \"swellHeight\": {\n        \"key_0\": 3264.2616503400136\n      },\n      \"swellDirection\": {\n        \"key_0\": 8618.516029490753,\n        \"key_1\": 6251.721686311897\n      },\n      \"swellPeriod\": {\n        \"key_0\": 1982.260487343852,\n        \"key_1\": 5713.449922568674\n      },\n      \"waterTemperature\": {\n        \"key_0\": 9018.808754756075,\n        \"key_1\": 7755.922281020856\n      },\n      \"currentSpeed\": {\n        \"key_0\": 5982.939318247343,\n        \"key_1\": 3156.074591967921\n      },\n      \"currentDirection\": {\n        \"key_0\": 7991.741309298765,\n        \"key_1\": 6373.055058783186\n      },\n      \"visibility\": {\n        \"key_0\": 8514.261050594852,\n        \"key_1\": 1489.9424851184551,\n        \"key_2\": 881.154767647363\n      },\n      \"seaLevel\": {\n        \"key_0\": 8477.384377302078\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": 7820,\n    \"dailyQuota\": 6343,\n    \"requestCount\": 7169,\n    \"lat\": 7477.016021728447,\n    \"lng\": 6176.234905017069,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a6b1b80-41d4-49da-9062-769ac53c562d",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c0c2f69-1f0b-48b5-bbbb-d5ca0ced9f34",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3a15b01-e5b9-480d-a4c0-d514c293661b",
+              "name": "Invalid parameters in the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7a74fafc-8bce-410e-95bf-257dace1ea6a",
+      "name": "Marine",
+      "description": {
+        "content": "Marine environment data including waves, currents, and water temperature",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65ab681e-fcd6-40b3-9196-d226cb2582aa",
+          "name": "Get Marine Point Data",
+          "request": {
+            "name": "Get Marine Point Data",
+            "description": {
+              "content": "Retrieve hourly marine environment data for a single coordinate. Returns wave, swell, current, and water temperature parameters from multiple marine data sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "marine",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "params",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of marine parameters to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for first forecast hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for last forecast hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Specify a single source or comma-separated list of sources"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1db5814c-305e-4e00-ab9b-591a0d0ef51c",
+              "name": "Hourly marine data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hours\": [\n    {\n      \"time\": \"string\",\n      \"airTemperature\": {\n        \"key_0\": 4735.981220472187,\n        \"key_1\": 9629.545816044263\n      },\n      \"windSpeed\": {\n        \"key_0\": 1690.7522057464764,\n        \"key_1\": 3880.3735413440554\n      },\n      \"windDirection\": {\n        \"key_0\": 5162.945947298923\n      },\n      \"gust\": {\n        \"key_0\": 5639.022560391487,\n        \"key_1\": 3198.7984474061604,\n        \"key_2\": 7332.484657222705\n      },\n      \"humidity\": {\n        \"key_0\": 6133.720364408371\n      },\n      \"pressure\": {\n        \"key_0\": 6802.231667156413,\n        \"key_1\": 6586.911637117801\n      },\n      \"cloudCover\": {\n        \"key_0\": 5051.823440090127,\n        \"key_1\": 5194.764591824207,\n        \"key_2\": 2412.5820447346837,\n        \"key_3\": 9167.391776891602\n      },\n      \"precipitation\": {\n        \"key_0\": 8066.54187235363\n      },\n      \"waveHeight\": {\n        \"key_0\": 7139.690391233131\n      },\n      \"waveDirection\": {\n        \"key_0\": 8929.269403964789,\n        \"key_1\": 9635.125933861513\n      },\n      \"wavePeriod\": {\n        \"key_0\": 8874.418887967693\n      },\n      \"swellHeight\": {\n        \"key_0\": 8712.931113629582\n      },\n      \"swellDirection\": {\n        \"key_0\": 5018.195939878163,\n        \"key_1\": 7308.479274486392\n      },\n      \"swellPeriod\": {\n        \"key_0\": 8811.926557578448\n      },\n      \"waterTemperature\": {\n        \"key_0\": 1659.6320379526885,\n        \"key_1\": 5463.635252884329,\n        \"key_2\": 6247.327249043069,\n        \"key_3\": 2652.143154000831\n      },\n      \"currentSpeed\": {\n        \"key_0\": 8872.40269327751\n      },\n      \"currentDirection\": {\n        \"key_0\": 1729.3591598239655\n      },\n      \"visibility\": {\n        \"key_0\": 7014.1470054528\n      },\n      \"seaLevel\": {\n        \"key_0\": 9570.794828755106,\n        \"key_1\": 4201.017396355157\n      }\n    },\n    {\n      \"time\": \"string\",\n      \"airTemperature\": {\n        \"key_0\": 7898.247805095825\n      },\n      \"windSpeed\": {\n        \"key_0\": 121.06244338402905,\n        \"key_1\": 9096.241284147414\n      },\n      \"windDirection\": {\n        \"key_0\": 1529.1040075146134\n      },\n      \"gust\": {\n        \"key_0\": 513.970064757261,\n        \"key_1\": 53.89347373155884\n      },\n      \"humidity\": {\n        \"key_0\": 332.0357373158878\n      },\n      \"pressure\": {\n        \"key_0\": 1170.4478776149608,\n        \"key_1\": 5957.442074587415\n      },\n      \"cloudCover\": {\n        \"key_0\": 5755.4116611949175\n      },\n      \"precipitation\": {\n        \"key_0\": 8134.005018124481\n      },\n      \"waveHeight\": {\n        \"key_0\": 4491.578326665923,\n        \"key_1\": 5691.2384935751925,\n        \"key_2\": 2458.2203046425066,\n        \"key_3\": 3518.763929469415\n      },\n      \"waveDirection\": {\n        \"key_0\": 2484.872016278934,\n        \"key_1\": 2678.5137190897967,\n        \"key_2\": 5085.226871669673,\n        \"key_3\": 8647.223136811555\n      },\n      \"wavePeriod\": {\n        \"key_0\": 3755.807209739591\n      },\n      \"swellHeight\": {\n        \"key_0\": 3264.2616503400136\n      },\n      \"swellDirection\": {\n        \"key_0\": 8618.516029490753,\n        \"key_1\": 6251.721686311897\n      },\n      \"swellPeriod\": {\n        \"key_0\": 1982.260487343852,\n        \"key_1\": 5713.449922568674\n      },\n      \"waterTemperature\": {\n        \"key_0\": 9018.808754756075,\n        \"key_1\": 7755.922281020856\n      },\n      \"currentSpeed\": {\n        \"key_0\": 5982.939318247343,\n        \"key_1\": 3156.074591967921\n      },\n      \"currentDirection\": {\n        \"key_0\": 7991.741309298765,\n        \"key_1\": 6373.055058783186\n      },\n      \"visibility\": {\n        \"key_0\": 8514.261050594852,\n        \"key_1\": 1489.9424851184551,\n        \"key_2\": 881.154767647363\n      },\n      \"seaLevel\": {\n        \"key_0\": 8477.384377302078\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": 7820,\n    \"dailyQuota\": 6343,\n    \"requestCount\": 7169,\n    \"lat\": 7477.016021728447,\n    \"lng\": 6176.234905017069,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "733421f8-6970-4e86-829a-b380eacdec16",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb20ce46-5088-4d15-96f2-7b7d54562045",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d9eccb06-e287-4045-ab6b-d50b7b97d9c6",
+      "name": "Tides",
+      "description": {
+        "content": "Tidal data including extremes, sea level, and tide station listings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4bc7ac63-353a-4aed-946a-7a155c57074d",
+          "name": "Get Tide Extremes",
+          "request": {
+            "name": "Get Tide Extremes",
+            "description": {
+              "content": "Retrieve information about high and low tide extremes for a single coordinate. Returns tide high and low events with timestamps and heights. If no datum is specified, values are relative to Mean Sea Level (MSL).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tide",
+                "extremes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for start of time range"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for end of time range"
+                },
+                {
+                  "disabled": false,
+                  "key": "datum",
+                  "value": "<string>",
+                  "description": "Datum relative to which values will be reported. Either MLLW or MSL."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6757476-b9a8-4a7f-8b21-530ba0b983ed",
+              "name": "Tide extreme data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "extremes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"height\": 5988.254096935008,\n      \"time\": \"string\",\n      \"type\": \"high\"\n    },\n    {\n      \"height\": 6433.937287238198,\n      \"time\": \"string\",\n      \"type\": \"low\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": 8257,\n    \"dailyQuota\": 6897,\n    \"requestCount\": 6314,\n    \"lat\": 6969.559254617281,\n    \"lng\": 5700.636299542498,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"datum\": \"string\",\n    \"station\": {\n      \"distance\": 5685,\n      \"lat\": 966.8302602671519,\n      \"lng\": 4021.631771400529,\n      \"name\": \"string\",\n      \"source\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81d30c0b-4d9b-4ae8-9b98-2dbb0e3ac038",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "extremes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1213706-ca49-49c1-ad71-dab030bdbacd",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "extremes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55a76301-a95c-4588-8751-3ab95952571e",
+          "name": "Get Tide Sea Level",
+          "request": {
+            "name": "Get Tide Sea Level",
+            "description": {
+              "content": "Retrieve the sea level in meters on an hourly basis for a single coordinate. If no datum is specified, values are relative to Mean Sea Level (MSL).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tide",
+                "sea-level"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for start of time range"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for end of time range"
+                },
+                {
+                  "disabled": false,
+                  "key": "datum",
+                  "value": "<string>",
+                  "description": "Datum relative to which values will be reported"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b6136e6-8c43-450a-ad44-da4065f71ebb",
+              "name": "Sea level data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "sea-level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"time\": \"string\",\n      \"sg\": 3656.5779210896753,\n      \"noaa\": 1303.9561264100885,\n      \"icon\": 7027.363362958134,\n      \"dwd\": 9898.180630964942\n    },\n    {\n      \"time\": \"string\",\n      \"sg\": 1775.879422899488,\n      \"noaa\": 841.5751730817311,\n      \"icon\": 6154.960844171446,\n      \"dwd\": 13.258421411352916\n    }\n  ],\n  \"meta\": {\n    \"cost\": 1515,\n    \"dailyQuota\": 8822,\n    \"requestCount\": 7766,\n    \"lat\": 6041.344080873281,\n    \"lng\": 3066.6552182202367,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"datum\": \"string\",\n    \"station\": {\n      \"distance\": 2303,\n      \"lat\": 1643.0771349515971,\n      \"lng\": 7430.088110116179,\n      \"name\": \"string\",\n      \"source\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e8c5051-de74-4967-8bdc-5b3b2b72df89",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "sea-level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd17c7a8-bd63-4973-982a-1a87fb290a9b",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "sea-level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "067b9874-f7f7-4f6b-a604-b2302256190c",
+          "name": "List Tide Stations",
+          "request": {
+            "name": "List Tide Stations",
+            "description": {
+              "content": "Retrieve a list of all available tide stations. Returns station names, coordinates, and data sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tide",
+                "stations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac98bf31-064a-49a9-9a7b-a46fe4cfb0ba",
+              "name": "List of tide stations returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "stations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"lat\": 8392.57692745435,\n      \"lng\": 1267.0314083676503,\n      \"name\": \"string\",\n      \"source\": \"string\"\n    },\n    {\n      \"lat\": 7335.30029095336,\n      \"lng\": 8720.738226947464,\n      \"name\": \"string\",\n      \"source\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": 5735,\n    \"dailyQuota\": 2425,\n    \"requestCount\": 5138\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94fa7795-c595-49ec-9a66-133d9e1d158c",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "stations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7957681b-189d-44de-b0f8-c843c8aacb22",
+          "name": "List Tide Stations for Area",
+          "request": {
+            "name": "List Tide Stations for Area",
+            "description": {
+              "content": "Retrieve a list of all tide stations within a defined geographic area defined by a bounding box.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tide",
+                "stations",
+                "area"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "box",
+                  "value": "<string>",
+                  "description": "(Required) Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95db48b5-3d4b-4262-b243-0ae4ad56b75d",
+              "name": "Tide stations within the area returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "stations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "box",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"lat\": 8392.57692745435,\n      \"lng\": 1267.0314083676503,\n      \"name\": \"string\",\n      \"source\": \"string\"\n    },\n    {\n      \"lat\": 7335.30029095336,\n      \"lng\": 8720.738226947464,\n      \"name\": \"string\",\n      \"source\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": 5735,\n    \"dailyQuota\": 2425,\n    \"requestCount\": 5138\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "767b684a-fcab-495c-8d26-2525d4183d84",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tide",
+                    "stations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "box",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cf818509-e94c-410d-9294-f80f011a5638",
+      "name": "Astronomy",
+      "description": {
+        "content": "Solar and lunar astronomical data including sunrise, sunset, moon phases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "765bcd51-b9a1-4167-93ee-d904827a3487",
+          "name": "Get Astronomy Point Data",
+          "request": {
+            "name": "Get Astronomy Point Data",
+            "description": {
+              "content": "Retrieve astronomical data for a single coordinate including sunrise, sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical dawn/dusk, and astronomical dawn/dusk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "astronomy",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for end date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d0b9277-064d-4336-8632-fcad430dcfe9",
+              "name": "Astronomy data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"time\": \"string\",\n      \"sunrise\": \"string\",\n      \"sunset\": \"string\",\n      \"moonrise\": \"string\",\n      \"moonset\": \"string\",\n      \"moonFraction\": 6829.904492815819,\n      \"moonPhase\": {\n        \"current\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 793.2192179837816\n        },\n        \"closest\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 9353.182201301815\n        }\n      },\n      \"civilDawn\": \"string\",\n      \"civilDusk\": \"string\",\n      \"nauticalDawn\": \"string\",\n      \"nauticalDusk\": \"string\",\n      \"astronomicalDawn\": \"string\",\n      \"astronomicalDusk\": \"string\"\n    },\n    {\n      \"time\": \"string\",\n      \"sunrise\": \"string\",\n      \"sunset\": \"string\",\n      \"moonrise\": \"string\",\n      \"moonset\": \"string\",\n      \"moonFraction\": 8517.420073394997,\n      \"moonPhase\": {\n        \"current\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 4439.05560273838\n        },\n        \"closest\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 7068.609301106187\n        }\n      },\n      \"civilDawn\": \"string\",\n      \"civilDusk\": \"string\",\n      \"nauticalDawn\": \"string\",\n      \"nauticalDusk\": \"string\",\n      \"astronomicalDawn\": \"string\",\n      \"astronomicalDusk\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": 3519,\n    \"dailyQuota\": 6263,\n    \"requestCount\": 782,\n    \"lat\": 7042.961856966288,\n    \"lng\": 2005.5295692105358,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "715e704f-9e56-4ca5-b62f-deb140328e0f",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f467035-8366-400c-be94-21cdc89d1095",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2fb58c05-9d4d-4008-9a11-6368b9d1335e",
+      "name": "Solar",
+      "description": {
+        "content": "Solar radiation and UV index data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1df5290d-bc1e-4e2f-a107-8128fa73662a",
+          "name": "Get Solar Point Data",
+          "request": {
+            "name": "Get Solar Point Data",
+            "description": {
+              "content": "Retrieve solar radiation data for a single coordinate including UV index and downward short-wave radiation flux (GHI).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "solar",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "params",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of solar parameters. E.g. uvIndex,downwardShortWaveRadiationFlux"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for first data hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for last data hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Specify a single source or comma-separated list of sources"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09913dd9-c24b-4e2d-aa41-2ca7714fb72f",
+              "name": "Solar data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solar",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"time\": \"string\",\n      \"uvIndex\": {\n        \"key_0\": 2717.3603815670976\n      },\n      \"downwardShortWaveRadiationFlux\": {\n        \"key_0\": 9411.643865561511,\n        \"key_1\": 1275.122553738366,\n        \"key_2\": 2011.7640892843458\n      }\n    },\n    {\n      \"time\": \"string\",\n      \"uvIndex\": {\n        \"key_0\": 4594.178979542327\n      },\n      \"downwardShortWaveRadiationFlux\": {\n        \"key_0\": 6634.32305694867,\n        \"key_1\": 4982.13011420584,\n        \"key_2\": 5261.225676954271\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": 3710,\n    \"dailyQuota\": 4071,\n    \"requestCount\": 1159,\n    \"lat\": 5284.001016865043,\n    \"lng\": 2502.2504148131297,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a13580ff-e65c-4861-9c94-e1eb804d7fad",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solar",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27dc8994-e37f-43f6-9a43-40d8154e9bb7",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solar",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e5173340-c245-4640-a526-7ce5bd032154",
+      "name": "Bio",
+      "description": {
+        "content": "Biological and oceanographic data including chlorophyll and nutrients",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69f9e98c-d3e0-4ebc-9bbb-59102130534a",
+          "name": "Get Bio Point Data",
+          "request": {
+            "name": "Get Bio Point Data",
+            "description": {
+              "content": "Retrieve biological and oceanographic data for a single coordinate including chlorophyll, nutrients, oxygen, salinity, phytoplankton, and soil moisture data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bio",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "params",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for first data hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for last data hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Specify a single source or comma-separated list of sources"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a10093d9-9614-470c-a6ff-35954d9aab18",
+              "name": "Bio data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hours\": [\n    {\n      \"time\": \"string\",\n      \"chlorophyll\": {\n        \"key_0\": 555.36512631707,\n        \"key_1\": 7355.006031403924,\n        \"key_2\": 4201.004427639377\n      },\n      \"oxygen\": {\n        \"key_0\": 6056.829459284629,\n        \"key_1\": 8471.78789832521,\n        \"key_2\": 8572.780109717945\n      },\n      \"salinity\": {\n        \"key_0\": 113.48810905135842\n      },\n      \"ph\": {\n        \"key_0\": 7680.2974416242805,\n        \"key_1\": 2677.3707765888753\n      },\n      \"nitrate\": {\n        \"key_0\": 2807.875459239735,\n        \"key_1\": 7835.368087937096\n      },\n      \"phosphate\": {\n        \"key_0\": 60.67427186144614\n      },\n      \"silicate\": {\n        \"key_0\": 8553.167691888295,\n        \"key_1\": 7560.476478872821\n      },\n      \"iron\": {\n        \"key_0\": 4426.140199974307\n      },\n      \"phytoplankton\": {\n        \"key_0\": 5013.249765970119,\n        \"key_1\": 5460.677429145995,\n        \"key_2\": 6062.800698570541\n      },\n      \"phyto\": {\n        \"key_0\": 5655.101006793752\n      },\n      \"soilMoisture\": {\n        \"key_0\": 7142.276581697939\n      },\n      \"soilTemperature\": {\n        \"key_0\": 2832.460894964306,\n        \"key_1\": 3890.3818234047303\n      },\n      \"surfaceTemperature\": {\n        \"key_0\": 5311.841063276329\n      }\n    },\n    {\n      \"time\": \"string\",\n      \"chlorophyll\": {\n        \"key_0\": 3193.7519631466494\n      },\n      \"oxygen\": {\n        \"key_0\": 8078.176925181595\n      },\n      \"salinity\": {\n        \"key_0\": 2538.2502954462548,\n        \"key_1\": 3163.278557151279\n      },\n      \"ph\": {\n        \"key_0\": 9275.750492643838,\n        \"key_1\": 76.69046975281701\n      },\n      \"nitrate\": {\n        \"key_0\": 5704.564286880995,\n        \"key_1\": 7859.105286627038\n      },\n      \"phosphate\": {\n        \"key_0\": 1208.6906396745055\n      },\n      \"silicate\": {\n        \"key_0\": 8658.742063748145,\n        \"key_1\": 1532.42323728917\n      },\n      \"iron\": {\n        \"key_0\": 6594.95647238321,\n        \"key_1\": 7342.703750125198\n      },\n      \"phytoplankton\": {\n        \"key_0\": 9517.193072267934,\n        \"key_1\": 884.5521868636707,\n        \"key_2\": 9838.805906476826\n      },\n      \"phyto\": {\n        \"key_0\": 6419.83160816479\n      },\n      \"soilMoisture\": {\n        \"key_0\": 8504.020129221994,\n        \"key_1\": 6800.050201291869,\n        \"key_2\": 3171.756189409315,\n        \"key_3\": 3388.2814781790203,\n        \"key_4\": 5227.7370535380005\n      },\n      \"soilTemperature\": {\n        \"key_0\": 909.1355704496896,\n        \"key_1\": 9974.1850665898\n      },\n      \"surfaceTemperature\": {\n        \"key_0\": 5496.418907388312,\n        \"key_1\": 134.09599644386594,\n        \"key_2\": 4996.532993948021\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": 4354,\n    \"dailyQuota\": 5310,\n    \"requestCount\": 4770,\n    \"lat\": 6013.775330623852,\n    \"lng\": 627.1507707412338,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b53f234-255a-4ad8-880c-4c77b68f3ec8",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "945c175c-dc1f-4baf-94ac-9a19f875433b",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "05e85953-34ee-4da9-bc29-d7d4aff6b624",
+      "name": "Elevation",
+      "description": {
+        "content": "Global elevation and bathymetry data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f6a1160-ef21-4fad-baa9-512753a306d3",
+          "name": "Get Elevation Point Data",
+          "request": {
+            "name": "Get Elevation Point Data",
+            "description": {
+              "content": "Retrieve elevation data for a single coordinate. Provides bathymetry for ocean coordinates and topography for land coordinates. Data is available globally.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "elevation",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae94feb4-dc40-4912-87b6-1a7ece8863e0",
+              "name": "Elevation data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "elevation",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"elevation\": 6289.123168418156\n  },\n  \"meta\": {\n    \"dailyQuota\": 1466,\n    \"requestCount\": 7048,\n    \"lat\": 4168.018242609548,\n    \"lng\": 3447.8806883658517,\n    \"distance\": 2032.6352312939377,\n    \"elevation\": {\n      \"unit\": \"string\",\n      \"source\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77cc8d52-235c-4dac-8c7e-57aaad21f754",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "elevation",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8785ec42-9ddd-421c-a8d1-d24a583fe298",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "elevation",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stormglass.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f52ed0a0-acca-40c3-84a0-bbbb6a9bc3ff",
+    "name": "Stormglass API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+      "type": "text/plain"
+    }
+  }
+}
