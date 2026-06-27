@@ -51,7 +51,7 @@ apis:
         url: https://raw.githubusercontent.com/api-evangelist/stormglass/refs/heads/main/openapi/stormglass-openapi.yml
       - type: Pricing
         url: https://stormglass.io/pricing
-      - type: SignUp
+      - type: Signup
         url: https://stormglass.io/register
       - type: Website
         url: https://stormglass.io/
@@ -68,7 +68,7 @@ common:
     url: https://stormglass.io/
   - type: Documentation
     url: https://docs.stormglass.io/
-  - type: SignUp
+  - type: Signup
     url: https://stormglass.io/register
   - type: Pricing
     url: https://stormglass.io/pricing

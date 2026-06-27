@@ -2,20 +2,13 @@
   "repo": "stormglass",
   "feeds": [
     {
-      "source": "https://stormglass.io/blog/feed/",
-      "feed_url": "https://stormglass.io/blog/feed/",
-      "title": "",
+      "source": "https://stormglass.io/blog",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://stormglass.io/",
-      "feed_url": "https://stormglass.io/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
-  "post_count": 0
+  "post_count": 20,
+  "fetched": "2026-06-27T13:12:34Z",
+  "agent_pulled": "2026-06-27"
 }
