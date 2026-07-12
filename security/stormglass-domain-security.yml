@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: stormglass.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 25 10:06:21 2026 GMT
+  hsts: false
+- host: api.stormglass.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 20 23:06:18 2026 GMT
+  hsts: null
+domains:
+- domain: stormglass.io
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

@@ -62,6 +62,10 @@ apis:
       - type: PrivacyPolicy
         url: https://stormglass.io/privacy-policy/
 common:
+  - type: DomainSecurity
+    url: security/stormglass-domain-security.yml
+  - type: Authentication
+    url: authentication/stormglass-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/stormglassio
   - type: Portal
