@@ -1,0 +1,163 @@
+openapi: 3.1.0
+info:
+  title: Stormglass Astronomy Solar API
+  description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
+  version: v2
+  contact:
+    name: Stormglass Support
+    url: https://stormglass.io/contact
+  termsOfService: https://stormglass.io/terms-and-conditions/
+servers:
+- url: https://api.stormglass.io/v2
+  description: Stormglass API v2
+security:
+- apiKeyAuth: []
+tags:
+- name: Solar
+  description: Solar radiation and UV index data
+paths:
+  /solar/point:
+    get:
+      operationId: getSolarPoint
+      summary: Get Solar Point Data
+      description: Retrieve solar radiation data for a single coordinate including UV index and downward short-wave radiation flux (GHI).
+      tags:
+      - Solar
+      parameters:
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Latitude of the desired coordinate
+      - name: lng
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Longitude of the desired coordinate
+      - name: params
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Comma-separated list of solar parameters. E.g. uvIndex,downwardShortWaveRadiationFlux
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for first data hour
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for last data hour
+      - name: source
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Specify a single source or comma-separated list of sources
+      responses:
+        '200':
+          description: Solar data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SolarPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+components:
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    SolarPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SolarHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    SolarHour:
+      type: object
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        uvIndex:
+          $ref: '#/components/schemas/SourceValue'
+        downwardShortWaveRadiationFlux:
+          $ref: '#/components/schemas/SourceValue'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key obtained from your Stormglass account dashboard
+externalDocs:
+  description: Stormglass API Documentation
+  url: https://docs.stormglass.io/

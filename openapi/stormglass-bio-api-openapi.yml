@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Stormglass Astronomy Bio API
+  description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
+  version: v2
+  contact:
+    name: Stormglass Support
+    url: https://stormglass.io/contact
+  termsOfService: https://stormglass.io/terms-and-conditions/
+servers:
+- url: https://api.stormglass.io/v2
+  description: Stormglass API v2
+security:
+- apiKeyAuth: []
+tags:
+- name: Bio
+  description: Biological and oceanographic data including chlorophyll and nutrients
+paths:
+  /bio/point:
+    get:
+      operationId: getBioPoint
+      summary: Get Bio Point Data
+      description: Retrieve biological and oceanographic data for a single coordinate including chlorophyll, nutrients, oxygen, salinity, phytoplankton, and soil moisture data.
+      tags:
+      - Bio
+      parameters:
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Latitude of the desired coordinate
+      - name: lng
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Longitude of the desired coordinate
+      - name: params
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for first data hour
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for last data hour
+      - name: source
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Specify a single source or comma-separated list of sources
+      responses:
+        '200':
+          description: Bio data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BioPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+components:
+  schemas:
+    BioPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/BioHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    BioHour:
+      type: object
+      description: Hourly biological and oceanographic data
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        chlorophyll:
+          $ref: '#/components/schemas/SourceValue'
+        oxygen:
+          $ref: '#/components/schemas/SourceValue'
+        salinity:
+          $ref: '#/components/schemas/SourceValue'
+        ph:
+          $ref: '#/components/schemas/SourceValue'
+        nitrate:
+          $ref: '#/components/schemas/SourceValue'
+        phosphate:
+          $ref: '#/components/schemas/SourceValue'
+        silicate:
+          $ref: '#/components/schemas/SourceValue'
+        iron:
+          $ref: '#/components/schemas/SourceValue'
+        phytoplankton:
+          $ref: '#/components/schemas/SourceValue'
+        phyto:
+          $ref: '#/components/schemas/SourceValue'
+        soilMoisture:
+          $ref: '#/components/schemas/SourceValue'
+        soilTemperature:
+          $ref: '#/components/schemas/SourceValue'
+        surfaceTemperature:
+          $ref: '#/components/schemas/SourceValue'
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key obtained from your Stormglass account dashboard
+externalDocs:
+  description: Stormglass API Documentation
+  url: https://docs.stormglass.io/

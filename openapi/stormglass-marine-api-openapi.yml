@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: Stormglass Astronomy Marine API
+  description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
+  version: v2
+  contact:
+    name: Stormglass Support
+    url: https://stormglass.io/contact
+  termsOfService: https://stormglass.io/terms-and-conditions/
+servers:
+- url: https://api.stormglass.io/v2
+  description: Stormglass API v2
+security:
+- apiKeyAuth: []
+tags:
+- name: Marine
+  description: Marine environment data including waves, currents, and water temperature
+paths:
+  /marine/point:
+    get:
+      operationId: getMarinePoint
+      summary: Get Marine Point Data
+      description: Retrieve hourly marine environment data for a single coordinate. Returns wave, swell, current, and water temperature parameters from multiple marine data sources.
+      tags:
+      - Marine
+      parameters:
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Latitude of the desired coordinate
+      - name: lng
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Longitude of the desired coordinate
+      - name: params
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Comma-separated list of marine parameters to retrieve
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for first forecast hour
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for last forecast hour
+      - name: source
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Specify a single source or comma-separated list of sources
+      responses:
+        '200':
+          description: Hourly marine data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+components:
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    WeatherPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherHour'
+          description: Hourly weather data
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    WeatherHour:
+      type: object
+      description: Hourly weather data for one time interval
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC for this data point
+        airTemperature:
+          $ref: '#/components/schemas/SourceValue'
+        windSpeed:
+          $ref: '#/components/schemas/SourceValue'
+        windDirection:
+          $ref: '#/components/schemas/SourceValue'
+        gust:
+          $ref: '#/components/schemas/SourceValue'
+        humidity:
+          $ref: '#/components/schemas/SourceValue'
+        pressure:
+          $ref: '#/components/schemas/SourceValue'
+        cloudCover:
+          $ref: '#/components/schemas/SourceValue'
+        precipitation:
+          $ref: '#/components/schemas/SourceValue'
+        waveHeight:
+          $ref: '#/components/schemas/SourceValue'
+        waveDirection:
+          $ref: '#/components/schemas/SourceValue'
+        wavePeriod:
+          $ref: '#/components/schemas/SourceValue'
+        swellHeight:
+          $ref: '#/components/schemas/SourceValue'
+        swellDirection:
+          $ref: '#/components/schemas/SourceValue'
+        swellPeriod:
+          $ref: '#/components/schemas/SourceValue'
+        waterTemperature:
+          $ref: '#/components/schemas/SourceValue'
+        currentSpeed:
+          $ref: '#/components/schemas/SourceValue'
+        currentDirection:
+          $ref: '#/components/schemas/SourceValue'
+        visibility:
+          $ref: '#/components/schemas/SourceValue'
+        seaLevel:
+          $ref: '#/components/schemas/SourceValue'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key obtained from your Stormglass account dashboard
+externalDocs:
+  description: Stormglass API Documentation
+  url: https://docs.stormglass.io/

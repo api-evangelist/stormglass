@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: Stormglass Astronomy API
+  description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
+  version: v2
+  contact:
+    name: Stormglass Support
+    url: https://stormglass.io/contact
+  termsOfService: https://stormglass.io/terms-and-conditions/
+servers:
+- url: https://api.stormglass.io/v2
+  description: Stormglass API v2
+security:
+- apiKeyAuth: []
+tags:
+- name: Astronomy
+  description: Solar and lunar astronomical data including sunrise, sunset, moon phases
+paths:
+  /astronomy/point:
+    get:
+      operationId: getAstronomyPoint
+      summary: Get Astronomy Point Data
+      description: Retrieve astronomical data for a single coordinate including sunrise, sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical dawn/dusk, and astronomical dawn/dusk.
+      tags:
+      - Astronomy
+      parameters:
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Latitude of the desired coordinate
+      - name: lng
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+        description: Longitude of the desired coordinate
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for start date
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Timestamp in UTC for end date
+      responses:
+        '200':
+          description: Astronomy data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AstronomyPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+components:
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    AstronomyPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AstronomyDay'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    AstronomyDay:
+      type: object
+      properties:
+        time:
+          type: string
+          description: Date for this data point
+        sunrise:
+          type: string
+          description: Sunrise time in UTC
+        sunset:
+          type: string
+          description: Sunset time in UTC
+        moonrise:
+          type: string
+          description: Moonrise time in UTC
+        moonset:
+          type: string
+          description: Moonset time in UTC
+        moonFraction:
+          type: number
+          format: float
+          description: Fraction of the moon that is illuminated
+        moonPhase:
+          type: object
+          properties:
+            current:
+              $ref: '#/components/schemas/MoonPhase'
+            closest:
+              $ref: '#/components/schemas/MoonPhase'
+        civilDawn:
+          type: string
+          description: Civil dawn time in UTC
+        civilDusk:
+          type: string
+          description: Civil dusk time in UTC
+        nauticalDawn:
+          type: string
+          description: Nautical dawn time in UTC
+        nauticalDusk:
+          type: string
+          description: Nautical dusk time in UTC
+        astronomicalDawn:
+          type: string
+          description: Astronomical dawn time in UTC
+        astronomicalDusk:
+          type: string
+          description: Astronomical dusk time in UTC
+    MoonPhase:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Description of the moon phase
+        time:
+          type: string
+          description: Timestamp in UTC for the moon phase
+        value:
+          type: number
+          format: float
+          description: Numeric value for the moon phase (0.0-1.0)
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key obtained from your Stormglass account dashboard
+externalDocs:
+  description: Stormglass API Documentation
+  url: https://docs.stormglass.io/
