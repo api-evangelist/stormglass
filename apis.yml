@@ -7,9 +7,22 @@ description: >-
   solar and astronomical data, biological oceanographic data, and elevation/bathymetry data. Used widely for maritime
   navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring applications.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/stormglass.png
 tags:
   - Astronomy
   - Bio
@@ -27,41 +40,177 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/stormglass/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: stormglass:stormglass-api
-    name: Stormglass API
-    description: >-
-      The Stormglass API provides global weather, marine, tidal, astronomical, solar, biological, and elevation data for
-      any coordinate on Earth. It aggregates data from multiple meteorological and oceanographic sources into a single
-      REST API. All endpoints return JSON and use API key authentication via the Authorization header.
-    humanURL: https://stormglass.io/
-    baseURL: https://api.stormglass.io/v2
-    tags:
-      - Astronomy
-      - Bio
-      - Elevation
-      - Forecasting
-      - Marine
-      - Solar
-      - Tides
-      - Weather
-    properties:
-      - type: Documentation
-        url: https://docs.stormglass.io/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/stormglass/refs/heads/main/openapi/stormglass-openapi.yml
-      - type: Pricing
-        url: https://stormglass.io/pricing
-      - type: Signup
-        url: https://stormglass.io/register
-      - type: Website
-        url: https://stormglass.io/
-      - type: Blog
-        url: https://stormglass.io/blog
-      - type: TermsOfService
-        url: https://stormglass.io/terms-and-conditions/
-      - type: PrivacyPolicy
-        url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-astronomy-api
+  name: Stormglass Astronomy API
+  description: Solar and lunar astronomical data including sunrise, sunset, moon phases
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Astronomy
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-astronomy-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-bio-api
+  name: Stormglass Bio API
+  description: Biological and oceanographic data including chlorophyll and nutrients
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Bio
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-bio-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-elevation-api
+  name: Stormglass Elevation API
+  description: Global elevation and bathymetry data
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Elevation
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-elevation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-marine-api
+  name: Stormglass Marine API
+  description: Marine environment data including waves, currents, and water temperature
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Marine
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-marine-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-solar-api
+  name: Stormglass Solar API
+  description: Solar radiation and UV index data
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Solar
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-solar-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-tides-api
+  name: Stormglass Tides API
+  description: Tidal data including extremes, sea level, and tide station listings
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Tides
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-tides-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
+- aid: stormglass:stormglass-weather-api
+  name: Stormglass Weather API
+  description: Point weather forecasts and historical weather data
+  humanURL: https://stormglass.io/
+  baseURL: https://api.stormglass.io/v2
+  tags:
+  - Weather
+  properties:
+  - type: OpenAPI
+    url: openapi/stormglass-weather-api-openapi.yml
+  - type: Documentation
+    url: https://docs.stormglass.io/
+  - type: Pricing
+    url: https://stormglass.io/pricing
+  - type: Signup
+    url: https://stormglass.io/register
+  - type: Website
+    url: https://stormglass.io/
+  - type: Blog
+    url: https://stormglass.io/blog
+  - type: TermsOfService
+    url: https://stormglass.io/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://stormglass.io/privacy-policy/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/stormglass/overview
   - type: AgenticAccess
     url: agentic-access/stormglass-agentic-access.yml
   - type: DomainSecurity
