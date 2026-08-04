@@ -1,0 +1,347 @@
+{
+  "info": {
+    "_postman_id": "01c29933-a960-4ce0-bb39-eba88b05ab9f",
+    "name": "Stormglass Astronomy Bio API",
+    "description": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:44.000Z",
+    "updatedAt": "2026-07-28T03:05:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-01c29933-a960-4ce0-bb39-eba88b05ab9f"
+  },
+  "item": [
+    {
+      "name": "bio",
+      "item": [
+        {
+          "name": "point",
+          "item": [
+            {
+              "name": "Get Bio Point Data",
+              "id": "6e00458a-94f1-48c1-96d7-5b608a9d7a1c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bio/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Latitude of the desired coordinate",
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Longitude of the desired coordinate",
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity",
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for first data hour",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for last data hour",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Specify a single source or comma-separated list of sources",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve biological and oceanographic data for a single coordinate including chlorophyll, nutrients, oxygen, salinity, phytoplankton, and soil moisture data."
+              },
+              "response": [
+                {
+                  "id": "c6ee795d-aee6-4b11-a4a2-b76c0d9d4011",
+                  "name": "Bio data returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bio/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bio",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity",
+                          "key": "params",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for first data hour",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for last data hour",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specify a single source or comma-separated list of sources",
+                          "key": "source",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"hours\": [\n    {\n      \"time\": \"<string>\",\n      \"chlorophyll\": {\n        \"Lorem_dc\": \"<float>\",\n        \"dolor_2_0\": \"<float>\"\n      },\n      \"oxygen\": {\n        \"quis19\": \"<float>\",\n        \"veniam32\": \"<float>\"\n      },\n      \"salinity\": {\n        \"laboris_af\": \"<float>\",\n        \"eu_50f\": \"<float>\",\n        \"exf\": \"<float>\"\n      },\n      \"ph\": {\n        \"Duis03\": \"<float>\",\n        \"veniam_4b6\": \"<float>\"\n      },\n      \"nitrate\": {\n        \"commodo_c39\": \"<float>\"\n      },\n      \"phosphate\": {\n        \"irure_4\": \"<float>\"\n      },\n      \"silicate\": {\n        \"magna_cb\": \"<float>\"\n      },\n      \"iron\": {\n        \"voluptate4ab\": \"<float>\",\n        \"elit_534\": \"<float>\",\n        \"quid7\": \"<float>\",\n        \"aliquip_3\": \"<float>\"\n      },\n      \"phytoplankton\": {\n        \"est1\": \"<float>\"\n      },\n      \"phyto\": {\n        \"dolore_cfe\": \"<float>\"\n      },\n      \"soilMoisture\": {\n        \"cupidatat60\": \"<float>\"\n      },\n      \"soilTemperature\": {\n        \"Duis_bd\": \"<float>\"\n      },\n      \"surfaceTemperature\": {\n        \"ullamco_28\": \"<float>\"\n      }\n    },\n    {\n      \"time\": \"<string>\",\n      \"chlorophyll\": {\n        \"proidenta\": \"<float>\"\n      },\n      \"oxygen\": {\n        \"Excepteur_cc1\": \"<float>\",\n        \"dolor_ce\": \"<float>\"\n      },\n      \"salinity\": {\n        \"adipisicing_a9\": \"<float>\"\n      },\n      \"ph\": {\n        \"deserunt_7f2\": \"<float>\",\n        \"culpada\": \"<float>\",\n        \"elit_05\": \"<float>\",\n        \"dolore_10\": \"<float>\"\n      },\n      \"nitrate\": {\n        \"adipisicing_c53\": \"<float>\",\n        \"officia3\": \"<float>\"\n      },\n      \"phosphate\": {\n        \"velitb6_\": \"<float>\",\n        \"reprehenderit_1d3\": \"<float>\",\n        \"uta92\": \"<float>\"\n      },\n      \"silicate\": {\n        \"aliqua_33\": \"<float>\"\n      },\n      \"iron\": {\n        \"commodoc4\": \"<float>\"\n      },\n      \"phytoplankton\": {\n        \"Excepteur_8\": \"<float>\",\n        \"eu6\": \"<float>\"\n      },\n      \"phyto\": {\n        \"estc6\": \"<float>\",\n        \"mollit_e43\": \"<float>\",\n        \"enim_b1b\": \"<float>\"\n      },\n      \"soilMoisture\": {\n        \"sint_f\": \"<float>\",\n        \"occaecat58\": \"<float>\"\n      },\n      \"soilTemperature\": {\n        \"non_\": \"<float>\",\n        \"adipisicing_3\": \"<float>\",\n        \"cillum51\": \"<float>\",\n        \"Ut_8f\": \"<float>\"\n      },\n      \"surfaceTemperature\": {\n        \"nona\": \"<float>\",\n        \"ea_fdf\": \"<float>\",\n        \"ullamcodc\": \"<float>\",\n        \"nulla_42e\": \"<float>\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\",\n    \"lat\": \"<float>\",\n    \"lng\": \"<float>\",\n    \"params\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"start\": \"<string>\",\n    \"end\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:44.000Z",
+                  "updatedAt": "2026-07-28T03:05:44.000Z",
+                  "uid": "35240-c6ee795d-aee6-4b11-a4a2-b76c0d9d4011"
+                },
+                {
+                  "id": "2dbb2b34-9171-4046-bcc7-b601cbd55acc",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bio/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bio",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity",
+                          "key": "params",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for first data hour",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for last data hour",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specify a single source or comma-separated list of sources",
+                          "key": "source",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"amet312\": \"<string>\",\n    \"Lorem58\": \"<string>\",\n    \"consectetur_8\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:44.000Z",
+                  "updatedAt": "2026-07-28T03:05:44.000Z",
+                  "uid": "35240-2dbb2b34-9171-4046-bcc7-b601cbd55acc"
+                },
+                {
+                  "id": "fb8e4b88-89c5-47d1-84fe-f9d82107dca4",
+                  "name": "Daily quota exceeded or payment required.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bio/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bio",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity",
+                          "key": "params",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for first data hour",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for last data hour",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specify a single source or comma-separated list of sources",
+                          "key": "source",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"amet312\": \"<string>\",\n    \"Lorem58\": \"<string>\",\n    \"consectetur_8\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:44.000Z",
+                  "updatedAt": "2026-07-28T03:05:44.000Z",
+                  "uid": "35240-fb8e4b88-89c5-47d1-84fe-f9d82107dca4"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:44.000Z",
+              "updatedAt": "2026-07-28T03:05:44.000Z",
+              "uid": "35240-6e00458a-94f1-48c1-96d7-5b608a9d7a1c"
+            }
+          ],
+          "id": "a95c9e59-9176-42bb-8f06-26216a140b6b",
+          "createdAt": "2026-07-28T03:05:44.000Z",
+          "updatedAt": "2026-07-28T03:05:44.000Z",
+          "uid": "35240-a95c9e59-9176-42bb-8f06-26216a140b6b"
+        }
+      ],
+      "id": "e6804fe6-1afe-4ad1-a57f-998e7b2e43d9",
+      "createdAt": "2026-07-28T03:05:44.000Z",
+      "updatedAt": "2026-07-28T03:05:44.000Z",
+      "uid": "35240-e6804fe6-1afe-4ad1-a57f-998e7b2e43d9"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stormglass.io/v2"
+    }
+  ]
+}

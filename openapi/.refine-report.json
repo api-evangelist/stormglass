@@ -1,0 +1,26 @@
+{
+  "provider": "stormglass",
+  "sources": [
+    "stormglass-astronomy-api-openapi.yml",
+    "stormglass-bio-api-openapi.yml",
+    "stormglass-elevation-api-openapi.yml",
+    "stormglass-marine-api-openapi.yml",
+    "stormglass-solar-api-openapi.yml",
+    "stormglass-tides-api-openapi.yml",
+    "stormglass-weather-api-openapi.yml"
+  ],
+  "outputs": [
+    "stormglass-astronomy-api-openapi.yml",
+    "stormglass-bio-api-openapi.yml",
+    "stormglass-elevation-api-openapi.yml",
+    "stormglass-marine-api-openapi.yml",
+    "stormglass-solar-api-openapi.yml",
+    "stormglass-tides-api-openapi.yml",
+    "stormglass-weather-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

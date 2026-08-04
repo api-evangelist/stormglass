@@ -1,0 +1,267 @@
+{
+  "info": {
+    "_postman_id": "9dd13491-34bb-41df-9f7a-dc60a820bbfc",
+    "name": "Stormglass Astronomy Elevation API",
+    "description": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:45.000Z",
+    "updatedAt": "2026-07-28T03:05:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9dd13491-34bb-41df-9f7a-dc60a820bbfc"
+  },
+  "item": [
+    {
+      "name": "elevation",
+      "item": [
+        {
+          "name": "point",
+          "item": [
+            {
+              "name": "Get Elevation Point Data",
+              "id": "0d5a0825-ab1a-4379-ab65-c9bc005b388e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/elevation/point?lat=<float>&lng=<float>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "elevation",
+                    "point"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Latitude of the desired coordinate",
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Longitude of the desired coordinate",
+                      "key": "lng",
+                      "value": "<float>"
+                    }
+                  ]
+                },
+                "description": "Retrieve elevation data for a single coordinate. Provides bathymetry for ocean coordinates and topography for land coordinates. Data is available globally."
+              },
+              "response": [
+                {
+                  "id": "cc8ce89a-edce-4f7c-9f51-c73b8e6663eb",
+                  "name": "Elevation data returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/elevation/point?lat=<float>&lng=<float>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "elevation",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"elevation\": \"<float>\"\n  },\n  \"meta\": {\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\",\n    \"lat\": \"<float>\",\n    \"lng\": \"<float>\",\n    \"distance\": \"<float>\",\n    \"elevation\": {\n      \"unit\": \"<string>\",\n      \"source\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:45.000Z",
+                  "updatedAt": "2026-07-28T03:05:45.000Z",
+                  "uid": "35240-cc8ce89a-edce-4f7c-9f51-c73b8e6663eb"
+                },
+                {
+                  "id": "abc00ce1-5b58-47d4-b01f-1987680e82f4",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/elevation/point?lat=<float>&lng=<float>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "elevation",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"mollit0\": \"<string>\",\n    \"incididunt_7\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:45.000Z",
+                  "updatedAt": "2026-07-28T03:05:45.000Z",
+                  "uid": "35240-abc00ce1-5b58-47d4-b01f-1987680e82f4"
+                },
+                {
+                  "id": "90181ddc-ceb5-43aa-a9c3-3a87ac942bed",
+                  "name": "Daily quota exceeded or payment required.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/elevation/point?lat=<float>&lng=<float>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "elevation",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"mollit0\": \"<string>\",\n    \"incididunt_7\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:45.000Z",
+                  "updatedAt": "2026-07-28T03:05:45.000Z",
+                  "uid": "35240-90181ddc-ceb5-43aa-a9c3-3a87ac942bed"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:45.000Z",
+              "updatedAt": "2026-07-28T03:05:45.000Z",
+              "uid": "35240-0d5a0825-ab1a-4379-ab65-c9bc005b388e"
+            }
+          ],
+          "id": "698e0a15-e1bf-438a-be7d-973daaf884c4",
+          "createdAt": "2026-07-28T03:05:45.000Z",
+          "updatedAt": "2026-07-28T03:05:45.000Z",
+          "uid": "35240-698e0a15-e1bf-438a-be7d-973daaf884c4"
+        }
+      ],
+      "id": "333c61a7-9946-4c24-88e3-7fba44ca4374",
+      "createdAt": "2026-07-28T03:05:45.000Z",
+      "updatedAt": "2026-07-28T03:05:45.000Z",
+      "uid": "35240-333c61a7-9946-4c24-88e3-7fba44ca4374"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stormglass.io/v2"
+    }
+  ]
+}

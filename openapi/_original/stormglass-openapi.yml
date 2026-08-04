@@ -1,0 +1,963 @@
+openapi: 3.1.0
+info:
+  title: Stormglass API
+  description: >-
+    Stormglass provides a global marine and weather API delivering high-resolution
+    forecasts, historical data, and environmental measurements for any coordinate
+    on Earth. The API supports weather point forecasts, marine data, tidal information,
+    solar and astronomical data, biological oceanographic data, and elevation data.
+    Commonly used for maritime navigation, renewable energy forecasting, outdoor
+    activity planning, and environmental monitoring.
+  version: v2
+  contact:
+    name: Stormglass Support
+    url: https://stormglass.io/contact
+  termsOfService: https://stormglass.io/terms-and-conditions/
+externalDocs:
+  description: Stormglass API Documentation
+  url: https://docs.stormglass.io/
+servers:
+  - url: https://api.stormglass.io/v2
+    description: Stormglass API v2
+tags:
+  - name: Weather
+    description: Point weather forecasts and historical weather data
+  - name: Marine
+    description: Marine environment data including waves, currents, and water temperature
+  - name: Tides
+    description: Tidal data including extremes, sea level, and tide station listings
+  - name: Astronomy
+    description: Solar and lunar astronomical data including sunrise, sunset, moon phases
+  - name: Solar
+    description: Solar radiation and UV index data
+  - name: Bio
+    description: Biological and oceanographic data including chlorophyll and nutrients
+  - name: Elevation
+    description: Global elevation and bathymetry data
+security:
+  - apiKeyAuth: []
+paths:
+  /weather/point:
+    get:
+      operationId: getWeatherPoint
+      summary: Get Weather Point Forecast
+      description: >-
+        Retrieve hourly weather forecast data for a single coordinate. Returns
+        atmospheric and marine weather parameters including temperature, wind,
+        waves, swell, and precipitation from multiple data sources.
+      tags:
+        - Weather
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: params
+          in: query
+          required: true
+          schema:
+            type: string
+          description: >-
+            Comma-separated list of parameters to retrieve. E.g. airTemperature,windSpeed,waveHeight
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for first forecast hour. UNIX format or URL-encoded ISO format.
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for last forecast hour. UNIX format or URL-encoded ISO format.
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >-
+            Specify a single source or comma-separated list of sources. E.g. noaa or dwd,noaa
+      responses:
+        '200':
+          description: Hourly weather data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /marine/point:
+    get:
+      operationId: getMarinePoint
+      summary: Get Marine Point Data
+      description: >-
+        Retrieve hourly marine environment data for a single coordinate.
+        Returns wave, swell, current, and water temperature parameters
+        from multiple marine data sources.
+      tags:
+        - Marine
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: params
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of marine parameters to retrieve
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for first forecast hour
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for last forecast hour
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Specify a single source or comma-separated list of sources
+      responses:
+        '200':
+          description: Hourly marine data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+  /tide/extremes:
+    get:
+      operationId: getTideExtremes
+      summary: Get Tide Extremes
+      description: >-
+        Retrieve information about high and low tide extremes for a single
+        coordinate. Returns tide high and low events with timestamps and heights.
+        If no datum is specified, values are relative to Mean Sea Level (MSL).
+      tags:
+        - Tides
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for start of time range
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for end of time range
+        - name: datum
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [MLLW, MSL]
+          description: Datum relative to which values will be reported. Either MLLW or MSL.
+      responses:
+        '200':
+          description: Tide extreme data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TideExtremesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+  /tide/sea-level:
+    get:
+      operationId: getTideSeaLevel
+      summary: Get Tide Sea Level
+      description: >-
+        Retrieve the sea level in meters on an hourly basis for a single
+        coordinate. If no datum is specified, values are relative to Mean Sea Level (MSL).
+      tags:
+        - Tides
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for start of time range
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for end of time range
+        - name: datum
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [MLLW, MSL]
+          description: Datum relative to which values will be reported
+      responses:
+        '200':
+          description: Sea level data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TideSeaLevelResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+  /tide/stations:
+    get:
+      operationId: getTideStations
+      summary: List Tide Stations
+      description: >-
+        Retrieve a list of all available tide stations. Returns station names,
+        coordinates, and data sources.
+      tags:
+        - Tides
+      responses:
+        '200':
+          description: List of tide stations returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TideStationsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /tide/stations/area:
+    get:
+      operationId: getTideStationsArea
+      summary: List Tide Stations for Area
+      description: >-
+        Retrieve a list of all tide stations within a defined geographic area
+        defined by a bounding box.
+      tags:
+        - Tides
+      parameters:
+        - name: box
+          in: query
+          required: true
+          schema:
+            type: string
+          description: >-
+            Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng
+      responses:
+        '200':
+          description: Tide stations within the area returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TideStationsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /astronomy/point:
+    get:
+      operationId: getAstronomyPoint
+      summary: Get Astronomy Point Data
+      description: >-
+        Retrieve astronomical data for a single coordinate including sunrise,
+        sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical
+        dawn/dusk, and astronomical dawn/dusk.
+      tags:
+        - Astronomy
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for start date
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for end date
+      responses:
+        '200':
+          description: Astronomy data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AstronomyPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+  /solar/point:
+    get:
+      operationId: getSolarPoint
+      summary: Get Solar Point Data
+      description: >-
+        Retrieve solar radiation data for a single coordinate including UV index
+        and downward short-wave radiation flux (GHI).
+      tags:
+        - Solar
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: params
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of solar parameters. E.g. uvIndex,downwardShortWaveRadiationFlux
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for first data hour
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for last data hour
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Specify a single source or comma-separated list of sources
+      responses:
+        '200':
+          description: Solar data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SolarPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+  /bio/point:
+    get:
+      operationId: getBioPoint
+      summary: Get Bio Point Data
+      description: >-
+        Retrieve biological and oceanographic data for a single coordinate
+        including chlorophyll, nutrients, oxygen, salinity, phytoplankton,
+        and soil moisture data.
+      tags:
+        - Bio
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+        - name: params
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for first data hour
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Timestamp in UTC for last data hour
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Specify a single source or comma-separated list of sources
+      responses:
+        '200':
+          description: Bio data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BioPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+  /elevation/point:
+    get:
+      operationId: getElevationPoint
+      summary: Get Elevation Point Data
+      description: >-
+        Retrieve elevation data for a single coordinate. Provides bathymetry
+        for ocean coordinates and topography for land coordinates. Data is
+        available globally.
+      tags:
+        - Elevation
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Latitude of the desired coordinate
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: Longitude of the desired coordinate
+      responses:
+        '200':
+          description: Elevation data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElevationPointResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/QuotaExceeded'
+
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key obtained from your Stormglass account dashboard
+
+  schemas:
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+
+    TideMetaData:
+      allOf:
+        - $ref: '#/components/schemas/MetaData'
+        - type: object
+          properties:
+            datum:
+              type: string
+              description: The datum used for tidal measurements
+            station:
+              type: object
+              properties:
+                distance:
+                  type: integer
+                  description: Distance between tide station and requested coordinate in km
+                lat:
+                  type: number
+                  format: float
+                  description: Latitude of the tide station
+                lng:
+                  type: number
+                  format: float
+                  description: Longitude of the tide station
+                name:
+                  type: string
+                  description: Name of the tide station
+                source:
+                  type: string
+                  description: Tide station owner or data source
+
+    StationMetaData:
+      type: object
+      properties:
+        cost:
+          type: integer
+        dailyQuota:
+          type: integer
+        requestCount:
+          type: integer
+
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
+
+    WeatherHour:
+      type: object
+      description: Hourly weather data for one time interval
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC for this data point
+        airTemperature:
+          $ref: '#/components/schemas/SourceValue'
+        windSpeed:
+          $ref: '#/components/schemas/SourceValue'
+        windDirection:
+          $ref: '#/components/schemas/SourceValue'
+        gust:
+          $ref: '#/components/schemas/SourceValue'
+        humidity:
+          $ref: '#/components/schemas/SourceValue'
+        pressure:
+          $ref: '#/components/schemas/SourceValue'
+        cloudCover:
+          $ref: '#/components/schemas/SourceValue'
+        precipitation:
+          $ref: '#/components/schemas/SourceValue'
+        waveHeight:
+          $ref: '#/components/schemas/SourceValue'
+        waveDirection:
+          $ref: '#/components/schemas/SourceValue'
+        wavePeriod:
+          $ref: '#/components/schemas/SourceValue'
+        swellHeight:
+          $ref: '#/components/schemas/SourceValue'
+        swellDirection:
+          $ref: '#/components/schemas/SourceValue'
+        swellPeriod:
+          $ref: '#/components/schemas/SourceValue'
+        waterTemperature:
+          $ref: '#/components/schemas/SourceValue'
+        currentSpeed:
+          $ref: '#/components/schemas/SourceValue'
+        currentDirection:
+          $ref: '#/components/schemas/SourceValue'
+        visibility:
+          $ref: '#/components/schemas/SourceValue'
+        seaLevel:
+          $ref: '#/components/schemas/SourceValue'
+
+    WeatherPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherHour'
+          description: Hourly weather data
+        meta:
+          $ref: '#/components/schemas/MetaData'
+
+    TideExtremePoint:
+      type: object
+      properties:
+        height:
+          type: number
+          format: float
+          description: Tide height in meters
+        time:
+          type: string
+          description: Timestamp in UTC for this tide event
+        type:
+          type: string
+          enum: [low, high]
+          description: Type of tide extreme
+
+    TideExtremesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TideExtremePoint'
+          description: List of tide extreme events
+        meta:
+          $ref: '#/components/schemas/TideMetaData'
+
+    TideSeaLevelHour:
+      type: object
+      description: Hourly sea level data from multiple sources
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        sg:
+          type: number
+          format: float
+          description: Stormglass composite sea level value in meters
+        noaa:
+          type: number
+          format: float
+        icon:
+          type: number
+          format: float
+        dwd:
+          type: number
+          format: float
+
+    TideSeaLevelResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TideSeaLevelHour'
+        meta:
+          $ref: '#/components/schemas/TideMetaData'
+
+    TideStation:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: float
+          description: Latitude of the tide station
+        lng:
+          type: number
+          format: float
+          description: Longitude of the tide station
+        name:
+          type: string
+          description: Name of the tide station
+        source:
+          type: string
+          description: Tide station owner
+
+    TideStationsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TideStation'
+        meta:
+          $ref: '#/components/schemas/StationMetaData'
+
+    MoonPhase:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Description of the moon phase
+        time:
+          type: string
+          description: Timestamp in UTC for the moon phase
+        value:
+          type: number
+          format: float
+          description: Numeric value for the moon phase (0.0-1.0)
+
+    AstronomyDay:
+      type: object
+      properties:
+        time:
+          type: string
+          description: Date for this data point
+        sunrise:
+          type: string
+          description: Sunrise time in UTC
+        sunset:
+          type: string
+          description: Sunset time in UTC
+        moonrise:
+          type: string
+          description: Moonrise time in UTC
+        moonset:
+          type: string
+          description: Moonset time in UTC
+        moonFraction:
+          type: number
+          format: float
+          description: Fraction of the moon that is illuminated
+        moonPhase:
+          type: object
+          properties:
+            current:
+              $ref: '#/components/schemas/MoonPhase'
+            closest:
+              $ref: '#/components/schemas/MoonPhase'
+        civilDawn:
+          type: string
+          description: Civil dawn time in UTC
+        civilDusk:
+          type: string
+          description: Civil dusk time in UTC
+        nauticalDawn:
+          type: string
+          description: Nautical dawn time in UTC
+        nauticalDusk:
+          type: string
+          description: Nautical dusk time in UTC
+        astronomicalDawn:
+          type: string
+          description: Astronomical dawn time in UTC
+        astronomicalDusk:
+          type: string
+          description: Astronomical dusk time in UTC
+
+    AstronomyPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AstronomyDay'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+
+    SolarHour:
+      type: object
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        uvIndex:
+          $ref: '#/components/schemas/SourceValue'
+        downwardShortWaveRadiationFlux:
+          $ref: '#/components/schemas/SourceValue'
+
+    SolarPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SolarHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+
+    BioHour:
+      type: object
+      description: Hourly biological and oceanographic data
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        chlorophyll:
+          $ref: '#/components/schemas/SourceValue'
+        oxygen:
+          $ref: '#/components/schemas/SourceValue'
+        salinity:
+          $ref: '#/components/schemas/SourceValue'
+        ph:
+          $ref: '#/components/schemas/SourceValue'
+        nitrate:
+          $ref: '#/components/schemas/SourceValue'
+        phosphate:
+          $ref: '#/components/schemas/SourceValue'
+        silicate:
+          $ref: '#/components/schemas/SourceValue'
+        iron:
+          $ref: '#/components/schemas/SourceValue'
+        phytoplankton:
+          $ref: '#/components/schemas/SourceValue'
+        phyto:
+          $ref: '#/components/schemas/SourceValue'
+        soilMoisture:
+          $ref: '#/components/schemas/SourceValue'
+        soilTemperature:
+          $ref: '#/components/schemas/SourceValue'
+        surfaceTemperature:
+          $ref: '#/components/schemas/SourceValue'
+
+    BioPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/BioHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+
+    ElevationData:
+      type: object
+      properties:
+        elevation:
+          type: number
+          format: float
+          description: Elevation in meters relative to sea level
+
+    ElevationMeta:
+      type: object
+      properties:
+        dailyQuota:
+          type: integer
+        requestCount:
+          type: integer
+        lat:
+          type: number
+          format: float
+        lng:
+          type: number
+          format: float
+        distance:
+          type: number
+          format: float
+        elevation:
+          type: object
+          properties:
+            unit:
+              type: string
+            source:
+              type: string
+
+    ElevationPointResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ElevationData'
+        meta:
+          $ref: '#/components/schemas/ElevationMeta'
+
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Invalid parameters in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

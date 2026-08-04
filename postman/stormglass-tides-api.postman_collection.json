@@ -1,0 +1,883 @@
+{
+  "info": {
+    "_postman_id": "df5c56b2-51d0-48cd-8e8f-c058ea31171e",
+    "name": "Stormglass Astronomy Tides API",
+    "description": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:48.000Z",
+    "updatedAt": "2026-07-28T03:05:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-df5c56b2-51d0-48cd-8e8f-c058ea31171e"
+  },
+  "item": [
+    {
+      "name": "tide",
+      "item": [
+        {
+          "name": "extremes",
+          "item": [
+            {
+              "name": "Get Tide Extremes",
+              "id": "2888b34b-9df0-42f9-83f4-fdca3b4cacb8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tide/extremes?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tide",
+                    "extremes"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Latitude of the desired coordinate",
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Longitude of the desired coordinate",
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for start of time range",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for end of time range",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Datum relative to which values will be reported. Either MLLW or MSL.",
+                      "key": "datum",
+                      "value": "MSL"
+                    }
+                  ]
+                },
+                "description": "Retrieve information about high and low tide extremes for a single coordinate. Returns tide high and low events with timestamps and heights. If no datum is specified, values are relative to Mean Sea Level (MSL)."
+              },
+              "response": [
+                {
+                  "id": "7f0d51e3-6e51-46bb-ab41-f0612a72aa65",
+                  "name": "Tide extreme data returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/extremes?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "extremes"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start of time range",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end of time range",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Datum relative to which values will be reported. Either MLLW or MSL.",
+                          "key": "datum",
+                          "value": "MSL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"height\": \"<float>\",\n      \"time\": \"<string>\",\n      \"type\": \"high\"\n    },\n    {\n      \"height\": \"<float>\",\n      \"time\": \"<string>\",\n      \"type\": \"low\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\",\n    \"lat\": \"<float>\",\n    \"lng\": \"<float>\",\n    \"params\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"start\": \"<string>\",\n    \"end\": \"<string>\",\n    \"datum\": \"<string>\",\n    \"station\": {\n      \"distance\": \"<integer>\",\n      \"lat\": \"<float>\",\n      \"lng\": \"<float>\",\n      \"name\": \"<string>\",\n      \"source\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-7f0d51e3-6e51-46bb-ab41-f0612a72aa65"
+                },
+                {
+                  "id": "72ba681f-9ed8-4281-a8ce-c577cd7a62ef",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/extremes?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "extremes"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start of time range",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end of time range",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Datum relative to which values will be reported. Either MLLW or MSL.",
+                          "key": "datum",
+                          "value": "MSL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"sit05\": \"<string>\",\n    \"sed_\": \"<string>\",\n    \"ea_c\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-72ba681f-9ed8-4281-a8ce-c577cd7a62ef"
+                },
+                {
+                  "id": "13e95fd8-7a32-4f91-acbf-a0697a4dcef4",
+                  "name": "Daily quota exceeded or payment required.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/extremes?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "extremes"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start of time range",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end of time range",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Datum relative to which values will be reported. Either MLLW or MSL.",
+                          "key": "datum",
+                          "value": "MSL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"sit05\": \"<string>\",\n    \"sed_\": \"<string>\",\n    \"ea_c\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-13e95fd8-7a32-4f91-acbf-a0697a4dcef4"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:48.000Z",
+              "updatedAt": "2026-07-28T03:05:48.000Z",
+              "uid": "35240-2888b34b-9df0-42f9-83f4-fdca3b4cacb8"
+            }
+          ],
+          "id": "a14beb55-f1c6-45c3-b365-04253a4b1785",
+          "createdAt": "2026-07-28T03:05:48.000Z",
+          "updatedAt": "2026-07-28T03:05:48.000Z",
+          "uid": "35240-a14beb55-f1c6-45c3-b365-04253a4b1785"
+        },
+        {
+          "name": "sea-level",
+          "item": [
+            {
+              "name": "Get Tide Sea Level",
+              "id": "b380b38d-0e46-45fe-93d5-e405fb537b3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tide/sea-level?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tide",
+                    "sea-level"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Latitude of the desired coordinate",
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Longitude of the desired coordinate",
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for start of time range",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for end of time range",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Datum relative to which values will be reported",
+                      "key": "datum",
+                      "value": "MSL"
+                    }
+                  ]
+                },
+                "description": "Retrieve the sea level in meters on an hourly basis for a single coordinate. If no datum is specified, values are relative to Mean Sea Level (MSL)."
+              },
+              "response": [
+                {
+                  "id": "89aa4518-ed78-4a37-9926-a36c0061a8c4",
+                  "name": "Sea level data returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/sea-level?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "sea-level"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start of time range",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end of time range",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Datum relative to which values will be reported",
+                          "key": "datum",
+                          "value": "MSL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"time\": \"<string>\",\n      \"sg\": \"<float>\",\n      \"noaa\": \"<float>\",\n      \"icon\": \"<float>\",\n      \"dwd\": \"<float>\"\n    },\n    {\n      \"time\": \"<string>\",\n      \"sg\": \"<float>\",\n      \"noaa\": \"<float>\",\n      \"icon\": \"<float>\",\n      \"dwd\": \"<float>\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\",\n    \"lat\": \"<float>\",\n    \"lng\": \"<float>\",\n    \"params\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"start\": \"<string>\",\n    \"end\": \"<string>\",\n    \"datum\": \"<string>\",\n    \"station\": {\n      \"distance\": \"<integer>\",\n      \"lat\": \"<float>\",\n      \"lng\": \"<float>\",\n      \"name\": \"<string>\",\n      \"source\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-89aa4518-ed78-4a37-9926-a36c0061a8c4"
+                },
+                {
+                  "id": "d9e535bd-443f-4fe9-8f1d-62400c8f0c7b",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/sea-level?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "sea-level"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start of time range",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end of time range",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Datum relative to which values will be reported",
+                          "key": "datum",
+                          "value": "MSL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"sit05\": \"<string>\",\n    \"sed_\": \"<string>\",\n    \"ea_c\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-d9e535bd-443f-4fe9-8f1d-62400c8f0c7b"
+                },
+                {
+                  "id": "491a066d-8d02-4b51-b40c-684c6c390ffc",
+                  "name": "Daily quota exceeded or payment required.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/sea-level?lat=<float>&lng=<float>&start=<string>&end=<string>&datum=MSL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "sea-level"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start of time range",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end of time range",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Datum relative to which values will be reported",
+                          "key": "datum",
+                          "value": "MSL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"sit05\": \"<string>\",\n    \"sed_\": \"<string>\",\n    \"ea_c\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-491a066d-8d02-4b51-b40c-684c6c390ffc"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:48.000Z",
+              "updatedAt": "2026-07-28T03:05:48.000Z",
+              "uid": "35240-b380b38d-0e46-45fe-93d5-e405fb537b3e"
+            }
+          ],
+          "id": "955d0d78-f9f3-4325-b345-63835106a782",
+          "createdAt": "2026-07-28T03:05:48.000Z",
+          "updatedAt": "2026-07-28T03:05:48.000Z",
+          "uid": "35240-955d0d78-f9f3-4325-b345-63835106a782"
+        },
+        {
+          "name": "stations",
+          "item": [
+            {
+              "name": "area",
+              "item": [
+                {
+                  "name": "List Tide Stations for Area",
+                  "id": "e1ea1a40-fa8a-4f4a-9e03-f81704a26f13",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/stations/area?box=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "stations",
+                        "area"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng",
+                          "key": "box",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of all tide stations within a defined geographic area defined by a bounding box."
+                  },
+                  "response": [
+                    {
+                      "id": "c06f1591-fb93-4f15-a237-112d9aecfaa2",
+                      "name": "Tide stations within the area returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tide/stations/area?box=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tide",
+                            "stations",
+                            "area"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng",
+                              "key": "box",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"lat\": \"<float>\",\n      \"lng\": \"<float>\",\n      \"name\": \"<string>\",\n      \"source\": \"<string>\"\n    },\n    {\n      \"lat\": \"<float>\",\n      \"lng\": \"<float>\",\n      \"name\": \"<string>\",\n      \"source\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:05:48.000Z",
+                      "updatedAt": "2026-07-28T03:05:48.000Z",
+                      "uid": "35240-c06f1591-fb93-4f15-a237-112d9aecfaa2"
+                    },
+                    {
+                      "id": "cb743637-9317-4254-ac46-30902fb0795c",
+                      "name": "Authentication failed. Check your API key.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tide/stations/area?box=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tide",
+                            "stations",
+                            "area"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng",
+                              "key": "box",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"sit05\": \"<string>\",\n    \"sed_\": \"<string>\",\n    \"ea_c\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:05:48.000Z",
+                      "updatedAt": "2026-07-28T03:05:48.000Z",
+                      "uid": "35240-cb743637-9317-4254-ac46-30902fb0795c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-e1ea1a40-fa8a-4f4a-9e03-f81704a26f13"
+                }
+              ],
+              "id": "1cc44de2-355c-459d-ab4d-12b5c785e97e",
+              "createdAt": "2026-07-28T03:05:48.000Z",
+              "updatedAt": "2026-07-28T03:05:48.000Z",
+              "uid": "35240-1cc44de2-355c-459d-ab4d-12b5c785e97e"
+            },
+            {
+              "name": "List Tide Stations",
+              "id": "eceab3b3-d60f-46a2-ab16-d7be8d25bb9e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tide/stations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tide",
+                    "stations"
+                  ]
+                },
+                "description": "Retrieve a list of all available tide stations. Returns station names, coordinates, and data sources."
+              },
+              "response": [
+                {
+                  "id": "eaac0468-5078-492a-8732-786da5cdf552",
+                  "name": "List of tide stations returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/stations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "stations"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"lat\": \"<float>\",\n      \"lng\": \"<float>\",\n      \"name\": \"<string>\",\n      \"source\": \"<string>\"\n    },\n    {\n      \"lat\": \"<float>\",\n      \"lng\": \"<float>\",\n      \"name\": \"<string>\",\n      \"source\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-eaac0468-5078-492a-8732-786da5cdf552"
+                },
+                {
+                  "id": "07915a75-ebba-498e-a0bf-7c68697dd5fc",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tide/stations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tide",
+                        "stations"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"sit05\": \"<string>\",\n    \"sed_\": \"<string>\",\n    \"ea_c\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:48.000Z",
+                  "updatedAt": "2026-07-28T03:05:48.000Z",
+                  "uid": "35240-07915a75-ebba-498e-a0bf-7c68697dd5fc"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:48.000Z",
+              "updatedAt": "2026-07-28T03:05:48.000Z",
+              "uid": "35240-eceab3b3-d60f-46a2-ab16-d7be8d25bb9e"
+            }
+          ],
+          "id": "3b371787-95c0-4cf7-98f4-2b08af4163b1",
+          "createdAt": "2026-07-28T03:05:48.000Z",
+          "updatedAt": "2026-07-28T03:05:48.000Z",
+          "uid": "35240-3b371787-95c0-4cf7-98f4-2b08af4163b1"
+        }
+      ],
+      "id": "767125d7-0fd6-41da-b02d-ce5a30ff210a",
+      "createdAt": "2026-07-28T03:05:48.000Z",
+      "updatedAt": "2026-07-28T03:05:48.000Z",
+      "uid": "35240-767125d7-0fd6-41da-b02d-ce5a30ff210a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stormglass.io/v2"
+    }
+  ]
+}

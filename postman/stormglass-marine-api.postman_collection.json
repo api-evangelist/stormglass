@@ -1,0 +1,347 @@
+{
+  "info": {
+    "_postman_id": "ec47ff95-cb5d-415b-830d-4765656669b1",
+    "name": "Stormglass Astronomy Marine API",
+    "description": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:46.000Z",
+    "updatedAt": "2026-07-28T03:05:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ec47ff95-cb5d-415b-830d-4765656669b1"
+  },
+  "item": [
+    {
+      "name": "marine",
+      "item": [
+        {
+          "name": "point",
+          "item": [
+            {
+              "name": "Get Marine Point Data",
+              "id": "e1b07a90-e9de-43bf-a15b-e77d84703889",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/marine/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Latitude of the desired coordinate",
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Longitude of the desired coordinate",
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of marine parameters to retrieve",
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for first forecast hour",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for last forecast hour",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Specify a single source or comma-separated list of sources",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve hourly marine environment data for a single coordinate. Returns wave, swell, current, and water temperature parameters from multiple marine data sources."
+              },
+              "response": [
+                {
+                  "id": "b7d909c1-5771-4ce0-885b-512c93a4526b",
+                  "name": "Hourly marine data returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/marine/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "marine",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of marine parameters to retrieve",
+                          "key": "params",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for first forecast hour",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for last forecast hour",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specify a single source or comma-separated list of sources",
+                          "key": "source",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"hours\": [\n    {\n      \"time\": \"<string>\",\n      \"airTemperature\": {\n        \"adipisicing20\": \"<float>\"\n      },\n      \"windSpeed\": {\n        \"proident4\": \"<float>\",\n        \"velit_33c\": \"<float>\"\n      },\n      \"windDirection\": {\n        \"nulla_f\": \"<float>\",\n        \"amet_9_\": \"<float>\",\n        \"culpa_1\": \"<float>\",\n        \"aute__\": \"<float>\"\n      },\n      \"gust\": {\n        \"aute_39\": \"<float>\",\n        \"aliquip_b8d\": \"<float>\"\n      },\n      \"humidity\": {\n        \"minim_75\": \"<float>\",\n        \"elit_09d\": \"<float>\",\n        \"Lorem_665\": \"<float>\"\n      },\n      \"pressure\": {\n        \"quis_c89\": \"<float>\",\n        \"nisi_ca3\": \"<float>\"\n      },\n      \"cloudCover\": {\n        \"ut_b_\": \"<float>\",\n        \"veniam2c4\": \"<float>\",\n        \"proident_d6\": \"<float>\"\n      },\n      \"precipitation\": {\n        \"ex_bec\": \"<float>\",\n        \"proidentc2\": \"<float>\",\n        \"anim9_\": \"<float>\"\n      },\n      \"waveHeight\": {\n        \"irure_88c\": \"<float>\",\n        \"cillum_bb\": \"<float>\",\n        \"ad__8f\": \"<float>\",\n        \"tempord0\": \"<float>\"\n      },\n      \"waveDirection\": {\n        \"eu3\": \"<float>\"\n      },\n      \"wavePeriod\": {\n        \"eu_d3d\": \"<float>\",\n        \"elit_92\": \"<float>\"\n      },\n      \"swellHeight\": {\n        \"ad62\": \"<float>\",\n        \"pariatur_95\": \"<float>\",\n        \"voluptatef\": \"<float>\"\n      },\n      \"swellDirection\": {\n        \"Excepteur6\": \"<float>\"\n      },\n      \"swellPeriod\": {\n        \"Ut_639\": \"<float>\"\n      },\n      \"waterTemperature\": {\n        \"labore7\": \"<float>\",\n        \"aute_7c_\": \"<float>\"\n      },\n      \"currentSpeed\": {\n        \"ea_1_d\": \"<float>\",\n        \"mollit5\": \"<float>\",\n        \"irured\": \"<float>\",\n        \"cillum97\": \"<float>\"\n      },\n      \"currentDirection\": {\n        \"consecteturfc\": \"<float>\"\n      },\n      \"visibility\": {\n        \"esse332\": \"<float>\",\n        \"Duis6\": \"<float>\",\n        \"sit_c\": \"<float>\"\n      },\n      \"seaLevel\": {\n        \"eu34\": \"<float>\"\n      }\n    },\n    {\n      \"time\": \"<string>\",\n      \"airTemperature\": {\n        \"officia55d\": \"<float>\",\n        \"ipsum_fe\": \"<float>\"\n      },\n      \"windSpeed\": {\n        \"elit_9\": \"<float>\"\n      },\n      \"windDirection\": {\n        \"Utb\": \"<float>\",\n        \"est075\": \"<float>\"\n      },\n      \"gust\": {\n        \"dolor_3_\": \"<float>\",\n        \"labore_415\": \"<float>\"\n      },\n      \"humidity\": {\n        \"proident__e\": \"<float>\",\n        \"consectetur_80\": \"<float>\",\n        \"officia_0\": \"<float>\"\n      },\n      \"pressure\": {\n        \"enimdff\": \"<float>\"\n      },\n      \"cloudCover\": {\n        \"aute4\": \"<float>\",\n        \"et_f\": \"<float>\",\n        \"consequat_17\": \"<float>\"\n      },\n      \"precipitation\": {\n        \"et_852\": \"<float>\"\n      },\n      \"waveHeight\": {\n        \"eiusmod2b\": \"<float>\"\n      },\n      \"waveDirection\": {\n        \"minim_a9\": \"<float>\",\n        \"laboruma8d\": \"<float>\"\n      },\n      \"wavePeriod\": {\n        \"eiusmod_cc\": \"<float>\",\n        \"Duis_44\": \"<float>\"\n      },\n      \"swellHeight\": {\n        \"est_d\": \"<float>\",\n        \"ad_4\": \"<float>\",\n        \"eaa24\": \"<float>\"\n      },\n      \"swellDirection\": {\n        \"officiaa\": \"<float>\"\n      },\n      \"swellPeriod\": {\n        \"nulla_559\": \"<float>\"\n      },\n      \"waterTemperature\": {\n        \"cillum_bb\": \"<float>\",\n        \"mollit__\": \"<float>\",\n        \"culpa_b\": \"<float>\",\n        \"suntd1\": \"<float>\"\n      },\n      \"currentSpeed\": {\n        \"aliquip_f5\": \"<float>\",\n        \"qui2\": \"<float>\"\n      },\n      \"currentDirection\": {\n        \"consequat_1\": \"<float>\",\n        \"qui_3\": \"<float>\",\n        \"sint46\": \"<float>\"\n      },\n      \"visibility\": {\n        \"culpa7\": \"<float>\",\n        \"id_9\": \"<float>\"\n      },\n      \"seaLevel\": {\n        \"Ut_53\": \"<float>\",\n        \"occaecat7\": \"<float>\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\",\n    \"lat\": \"<float>\",\n    \"lng\": \"<float>\",\n    \"params\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"start\": \"<string>\",\n    \"end\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:46.000Z",
+                  "updatedAt": "2026-07-28T03:05:46.000Z",
+                  "uid": "35240-b7d909c1-5771-4ce0-885b-512c93a4526b"
+                },
+                {
+                  "id": "8f75b50c-e0a9-4a31-bdf4-5956f8fc2cef",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/marine/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "marine",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of marine parameters to retrieve",
+                          "key": "params",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for first forecast hour",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for last forecast hour",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specify a single source or comma-separated list of sources",
+                          "key": "source",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"ea48\": \"<string>\",\n    \"minim_3b4\": \"<string>\",\n    \"velit_da\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:46.000Z",
+                  "updatedAt": "2026-07-28T03:05:46.000Z",
+                  "uid": "35240-8f75b50c-e0a9-4a31-bdf4-5956f8fc2cef"
+                },
+                {
+                  "id": "b3fd273a-ede8-4405-a141-ea844dd3c9e1",
+                  "name": "Daily quota exceeded or payment required.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/marine/point?lat=<float>&lng=<float>&params=<string>&start=<string>&end=<string>&source=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "marine",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of marine parameters to retrieve",
+                          "key": "params",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for first forecast hour",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for last forecast hour",
+                          "key": "end",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specify a single source or comma-separated list of sources",
+                          "key": "source",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"ea48\": \"<string>\",\n    \"minim_3b4\": \"<string>\",\n    \"velit_da\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:46.000Z",
+                  "updatedAt": "2026-07-28T03:05:46.000Z",
+                  "uid": "35240-b3fd273a-ede8-4405-a141-ea844dd3c9e1"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:46.000Z",
+              "updatedAt": "2026-07-28T03:05:46.000Z",
+              "uid": "35240-e1b07a90-e9de-43bf-a15b-e77d84703889"
+            }
+          ],
+          "id": "b0d413ff-f8ae-4d8c-b0a6-e0550f6a3a19",
+          "createdAt": "2026-07-28T03:05:46.000Z",
+          "updatedAt": "2026-07-28T03:05:46.000Z",
+          "uid": "35240-b0d413ff-f8ae-4d8c-b0a6-e0550f6a3a19"
+        }
+      ],
+      "id": "b987519e-09b1-4fe2-ae22-7f5c7f77d02b",
+      "createdAt": "2026-07-28T03:05:46.000Z",
+      "updatedAt": "2026-07-28T03:05:46.000Z",
+      "uid": "35240-b987519e-09b1-4fe2-ae22-7f5c7f77d02b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stormglass.io/v2"
+    }
+  ]
+}

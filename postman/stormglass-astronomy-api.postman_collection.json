@@ -1,0 +1,307 @@
+{
+  "info": {
+    "_postman_id": "f08a83c2-5c38-43dd-9f99-a8264d8f1a74",
+    "name": "Stormglass Astronomy API",
+    "description": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:43.000Z",
+    "updatedAt": "2026-07-28T03:05:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f08a83c2-5c38-43dd-9f99-a8264d8f1a74"
+  },
+  "item": [
+    {
+      "name": "astronomy",
+      "item": [
+        {
+          "name": "point",
+          "item": [
+            {
+              "name": "Get Astronomy Point Data",
+              "id": "58d555a2-f759-4c8f-a025-60197e5fe90a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/astronomy/point?lat=<float>&lng=<float>&start=<string>&end=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Latitude of the desired coordinate",
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "(Required) Longitude of the desired coordinate",
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for start date",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp in UTC for end date",
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve astronomical data for a single coordinate including sunrise, sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical dawn/dusk, and astronomical dawn/dusk."
+              },
+              "response": [
+                {
+                  "id": "17eff149-b956-4f2f-a91c-9f48580ffb33",
+                  "name": "Astronomy data returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/astronomy/point?lat=<float>&lng=<float>&start=<string>&end=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "astronomy",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start date",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end date",
+                          "key": "end",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"time\": \"<string>\",\n      \"sunrise\": \"<string>\",\n      \"sunset\": \"<string>\",\n      \"moonrise\": \"<string>\",\n      \"moonset\": \"<string>\",\n      \"moonFraction\": \"<float>\",\n      \"moonPhase\": {\n        \"current\": {\n          \"text\": \"<string>\",\n          \"time\": \"<string>\",\n          \"value\": \"<float>\"\n        },\n        \"closest\": {\n          \"text\": \"<string>\",\n          \"time\": \"<string>\",\n          \"value\": \"<float>\"\n        }\n      },\n      \"civilDawn\": \"<string>\",\n      \"civilDusk\": \"<string>\",\n      \"nauticalDawn\": \"<string>\",\n      \"nauticalDusk\": \"<string>\",\n      \"astronomicalDawn\": \"<string>\",\n      \"astronomicalDusk\": \"<string>\"\n    },\n    {\n      \"time\": \"<string>\",\n      \"sunrise\": \"<string>\",\n      \"sunset\": \"<string>\",\n      \"moonrise\": \"<string>\",\n      \"moonset\": \"<string>\",\n      \"moonFraction\": \"<float>\",\n      \"moonPhase\": {\n        \"current\": {\n          \"text\": \"<string>\",\n          \"time\": \"<string>\",\n          \"value\": \"<float>\"\n        },\n        \"closest\": {\n          \"text\": \"<string>\",\n          \"time\": \"<string>\",\n          \"value\": \"<float>\"\n        }\n      },\n      \"civilDawn\": \"<string>\",\n      \"civilDusk\": \"<string>\",\n      \"nauticalDawn\": \"<string>\",\n      \"nauticalDusk\": \"<string>\",\n      \"astronomicalDawn\": \"<string>\",\n      \"astronomicalDusk\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": \"<integer>\",\n    \"dailyQuota\": \"<integer>\",\n    \"requestCount\": \"<integer>\",\n    \"lat\": \"<float>\",\n    \"lng\": \"<float>\",\n    \"params\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"start\": \"<string>\",\n    \"end\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:44.000Z",
+                  "updatedAt": "2026-07-28T03:05:44.000Z",
+                  "uid": "35240-17eff149-b956-4f2f-a91c-9f48580ffb33"
+                },
+                {
+                  "id": "e49ed5c2-2fb1-4ca8-8da8-c4858ea8ea1c",
+                  "name": "Authentication failed. Check your API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/astronomy/point?lat=<float>&lng=<float>&start=<string>&end=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "astronomy",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start date",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end date",
+                          "key": "end",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"et_1\": \"<string>\",\n    \"cillum28e\": \"<string>\",\n    \"laborum_eb3\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:44.000Z",
+                  "updatedAt": "2026-07-28T03:05:44.000Z",
+                  "uid": "35240-e49ed5c2-2fb1-4ca8-8da8-c4858ea8ea1c"
+                },
+                {
+                  "id": "fa169bee-51d7-49ac-b9ac-3628d93aff2e",
+                  "name": "Daily quota exceeded or payment required.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/astronomy/point?lat=<float>&lng=<float>&start=<string>&end=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "astronomy",
+                        "point"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Latitude of the desired coordinate",
+                          "key": "lat",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "(Required) Longitude of the desired coordinate",
+                          "key": "lng",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for start date",
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp in UTC for end date",
+                          "key": "end",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"et_1\": \"<string>\",\n    \"cillum28e\": \"<string>\",\n    \"laborum_eb3\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:05:44.000Z",
+                  "updatedAt": "2026-07-28T03:05:44.000Z",
+                  "uid": "35240-fa169bee-51d7-49ac-b9ac-3628d93aff2e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:44.000Z",
+              "updatedAt": "2026-07-28T03:05:44.000Z",
+              "uid": "35240-58d555a2-f759-4c8f-a025-60197e5fe90a"
+            }
+          ],
+          "id": "dabf7b96-dd37-4260-b25e-698535eaf7eb",
+          "createdAt": "2026-07-28T03:05:44.000Z",
+          "updatedAt": "2026-07-28T03:05:44.000Z",
+          "uid": "35240-dabf7b96-dd37-4260-b25e-698535eaf7eb"
+        }
+      ],
+      "id": "f6785652-5ee6-46af-a84e-acc8096c058d",
+      "createdAt": "2026-07-28T03:05:44.000Z",
+      "updatedAt": "2026-07-28T03:05:44.000Z",
+      "uid": "35240-f6785652-5ee6-46af-a84e-acc8096c058d"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stormglass.io/v2"
+    }
+  ]
+}
