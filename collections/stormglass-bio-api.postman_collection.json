@@ -1,0 +1,329 @@
+{
+  "item": [
+    {
+      "id": "097538d1-60ea-48a6-b220-a9ce09e1f813",
+      "name": "Bio",
+      "description": {
+        "content": "Biological and oceanographic data including chlorophyll and nutrients",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5bd56144-30a6-4051-bab5-a30ec6073052",
+          "name": "Get Bio Point Data",
+          "request": {
+            "name": "Get Bio Point Data",
+            "description": {
+              "content": "Retrieve biological and oceanographic data for a single coordinate including chlorophyll, nutrients, oxygen, salinity, phytoplankton, and soil moisture data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bio",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "params",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of bio parameters. E.g. chlorophyll,oxygen,salinity"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for first data hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for last data hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Specify a single source or comma-separated list of sources"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e2bf73c-bcf8-4ba2-b7b0-d8f36800e7fd",
+              "name": "Bio data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hours\": [\n    {\n      \"time\": \"string\",\n      \"chlorophyll\": {\n        \"key_0\": 9867.77474186632\n      },\n      \"oxygen\": {\n        \"key_0\": 5067.58640952917,\n        \"key_1\": 5786.851836165535\n      },\n      \"salinity\": {\n        \"key_0\": 7085.539799409926,\n        \"key_1\": 4512.526205664407,\n        \"key_2\": 6355.918365288622\n      },\n      \"ph\": {\n        \"key_0\": 6147.511510450539\n      },\n      \"nitrate\": {\n        \"key_0\": 6837.525468426274,\n        \"key_1\": 574.8762973919407,\n        \"key_2\": 8665.371439877192\n      },\n      \"phosphate\": {\n        \"key_0\": 2551.422698103968,\n        \"key_1\": 1983.6222561684513,\n        \"key_2\": 582.9827837070201,\n        \"key_3\": 667.7098220985145\n      },\n      \"silicate\": {\n        \"key_0\": 534.0489368972901,\n        \"key_1\": 4915.757225147064,\n        \"key_2\": 7036.534044336128\n      },\n      \"iron\": {\n        \"key_0\": 7472.743162616093\n      },\n      \"phytoplankton\": {\n        \"key_0\": 5664.7656199631665,\n        \"key_1\": 7645.428299091794\n      },\n      \"phyto\": {\n        \"key_0\": 2830.4199654146446,\n        \"key_1\": 1594.122905044817,\n        \"key_2\": 6869.581185812523,\n        \"key_3\": 3045.5369230732554\n      },\n      \"soilMoisture\": {\n        \"key_0\": 7443.601047383932,\n        \"key_1\": 1987.685515787827,\n        \"key_2\": 8578.004680818645,\n        \"key_3\": 938.9445005209008\n      },\n      \"soilTemperature\": {\n        \"key_0\": 9029.376503179345,\n        \"key_1\": 7049.1647248506215\n      },\n      \"surfaceTemperature\": {\n        \"key_0\": 466.9400774533117\n      }\n    },\n    {\n      \"time\": \"string\",\n      \"chlorophyll\": {\n        \"key_0\": 3491.5585580834963\n      },\n      \"oxygen\": {\n        \"key_0\": 1479.8427707819928,\n        \"key_1\": 5432.967647569573,\n        \"key_2\": 7149.226639879539,\n        \"key_3\": 8887.178782286452,\n        \"key_4\": 4465.872033382908\n      },\n      \"salinity\": {\n        \"key_0\": 533.2562614400705\n      },\n      \"ph\": {\n        \"key_0\": 8401.530858780257,\n        \"key_1\": 8434.065458338122\n      },\n      \"nitrate\": {\n        \"key_0\": 3269.082010953891,\n        \"key_1\": 2758.285100375275\n      },\n      \"phosphate\": {\n        \"key_0\": 7.613238300923086,\n        \"key_1\": 1848.6131073602573\n      },\n      \"silicate\": {\n        \"key_0\": 468.865033292889,\n        \"key_1\": 9156.538074657918,\n        \"key_2\": 3225.784195607749\n      },\n      \"iron\": {\n        \"key_0\": 1163.1606285368823\n      },\n      \"phytoplankton\": {\n        \"key_0\": 2296.1171986390027,\n        \"key_1\": 8281.143750148995,\n        \"key_2\": 674.4164357478244\n      },\n      \"phyto\": {\n        \"key_0\": 9249.06837378504,\n        \"key_1\": 1967.735941165899\n      },\n      \"soilMoisture\": {\n        \"key_0\": 9777.225636843243,\n        \"key_1\": 3180.2534216624636\n      },\n      \"soilTemperature\": {\n        \"key_0\": 4987.344244937352,\n        \"key_1\": 3984.4672689938566,\n        \"key_2\": 834.1795230851401\n      },\n      \"surfaceTemperature\": {\n        \"key_0\": 2767.251377689729,\n        \"key_1\": 1346.8780207217746\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": 1266,\n    \"dailyQuota\": 7688,\n    \"requestCount\": 1970,\n    \"lat\": 8009.5423542330045,\n    \"lng\": 6669.897915005302,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4555c0c-060c-410f-9ab0-68cbdcff6ac5",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "238b167d-371a-4ece-a0ff-d923cf37a437",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bio",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stormglass.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2491626a-c9a3-41d5-a9a6-ec5098c69274",
+    "name": "Stormglass Astronomy Bio API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass Astronomy Elevation API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Elevation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Elevation Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/elevation/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              }
+            ]
+          },
+          "docs": "Retrieve elevation data for a single coordinate. Provides bathymetry for ocean coordinates and topography for land coordinates. Data is available globally."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

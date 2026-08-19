@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass Astronomy Weather API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Weather",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Weather Point Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/weather/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of parameters to retrieve. E.g. airTemperature,windSpeed,waveHeight"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first forecast hour. UNIX format or URL-encoded ISO format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last forecast hour. UNIX format or URL-encoded ISO format."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources. E.g. noaa or dwd,noaa"
+              }
+            ]
+          },
+          "docs": "Retrieve hourly weather forecast data for a single coordinate. Returns atmospheric and marine weather parameters including temperature, wind, waves, swell, and precipitation from multiple data sources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

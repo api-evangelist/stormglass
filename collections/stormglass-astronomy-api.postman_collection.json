@@ -1,0 +1,293 @@
+{
+  "item": [
+    {
+      "id": "6586c232-e80f-4e81-9529-ef76c58b70e1",
+      "name": "Astronomy",
+      "description": {
+        "content": "Solar and lunar astronomical data including sunrise, sunset, moon phases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b274c06-9e89-4c2f-a3d3-5d19423941f5",
+          "name": "Get Astronomy Point Data",
+          "request": {
+            "name": "Get Astronomy Point Data",
+            "description": {
+              "content": "Retrieve astronomical data for a single coordinate including sunrise, sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical dawn/dusk, and astronomical dawn/dusk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "astronomy",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for end date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61b975b3-dcee-40be-aaf2-900f88fa76f5",
+              "name": "Astronomy data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"time\": \"string\",\n      \"sunrise\": \"string\",\n      \"sunset\": \"string\",\n      \"moonrise\": \"string\",\n      \"moonset\": \"string\",\n      \"moonFraction\": 4932.182314351005,\n      \"moonPhase\": {\n        \"current\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 2804.7512584175984\n        },\n        \"closest\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 4541.106229839767\n        }\n      },\n      \"civilDawn\": \"string\",\n      \"civilDusk\": \"string\",\n      \"nauticalDawn\": \"string\",\n      \"nauticalDusk\": \"string\",\n      \"astronomicalDawn\": \"string\",\n      \"astronomicalDusk\": \"string\"\n    },\n    {\n      \"time\": \"string\",\n      \"sunrise\": \"string\",\n      \"sunset\": \"string\",\n      \"moonrise\": \"string\",\n      \"moonset\": \"string\",\n      \"moonFraction\": 5993.532910482403,\n      \"moonPhase\": {\n        \"current\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 8243.580207574389\n        },\n        \"closest\": {\n          \"text\": \"string\",\n          \"time\": \"string\",\n          \"value\": 8743.055934072554\n        }\n      },\n      \"civilDawn\": \"string\",\n      \"civilDusk\": \"string\",\n      \"nauticalDawn\": \"string\",\n      \"nauticalDusk\": \"string\",\n      \"astronomicalDawn\": \"string\",\n      \"astronomicalDusk\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"cost\": 9543,\n    \"dailyQuota\": 1492,\n    \"requestCount\": 2792,\n    \"lat\": 4416.318773018587,\n    \"lng\": 9132.233028897872,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0473b66b-042d-4cfd-8164-16fed2221639",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33e7b892-fa6c-4af4-8d67-3c78dbcd4564",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "astronomy",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stormglass.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "38e17522-f302-4b03-a62d-1b46ff65d089",
+    "name": "Stormglass Astronomy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+      "type": "text/plain"
+    }
+  }
+}

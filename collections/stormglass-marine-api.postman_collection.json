@@ -1,0 +1,329 @@
+{
+  "item": [
+    {
+      "id": "643ae047-a91d-4a65-8971-e2f43ee4882a",
+      "name": "Marine",
+      "description": {
+        "content": "Marine environment data including waves, currents, and water temperature",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17fe07d1-673a-40f9-bf47-2813fb23d98b",
+          "name": "Get Marine Point Data",
+          "request": {
+            "name": "Get Marine Point Data",
+            "description": {
+              "content": "Retrieve hourly marine environment data for a single coordinate. Returns wave, swell, current, and water temperature parameters from multiple marine data sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "marine",
+                "point"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the desired coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "params",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of marine parameters to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for first forecast hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Timestamp in UTC for last forecast hour"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Specify a single source or comma-separated list of sources"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf144d0d-4cf0-431d-b7f2-4260678339d2",
+              "name": "Hourly marine data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hours\": [\n    {\n      \"time\": \"string\",\n      \"airTemperature\": {\n        \"key_0\": 4900.804775596568,\n        \"key_1\": 7158.144430665283\n      },\n      \"windSpeed\": {\n        \"key_0\": 4176.334162913293\n      },\n      \"windDirection\": {\n        \"key_0\": 8941.184741001673,\n        \"key_1\": 9535.449972673721,\n        \"key_2\": 4187.47268960894\n      },\n      \"gust\": {\n        \"key_0\": 8247.07762213577,\n        \"key_1\": 5136.547039647823\n      },\n      \"humidity\": {\n        \"key_0\": 6010.179781824958,\n        \"key_1\": 561.8266884651124\n      },\n      \"pressure\": {\n        \"key_0\": 441.4823902709952\n      },\n      \"cloudCover\": {\n        \"key_0\": 9668.699216000823\n      },\n      \"precipitation\": {\n        \"key_0\": 4410.686679002799,\n        \"key_1\": 7973.668308188578,\n        \"key_2\": 9844.276036890871\n      },\n      \"waveHeight\": {\n        \"key_0\": 5240.155102935263,\n        \"key_1\": 9333.668752194533,\n        \"key_2\": 2880.1292907517495\n      },\n      \"waveDirection\": {\n        \"key_0\": 3234.6431614194403,\n        \"key_1\": 2202.540344026326\n      },\n      \"wavePeriod\": {\n        \"key_0\": 6742.232826202088,\n        \"key_1\": 8000.117170936357,\n        \"key_2\": 4869.980305764\n      },\n      \"swellHeight\": {\n        \"key_0\": 170.53278191814235\n      },\n      \"swellDirection\": {\n        \"key_0\": 1276.9525473187693,\n        \"key_1\": 62.46000433308141,\n        \"key_2\": 9898.664270525456\n      },\n      \"swellPeriod\": {\n        \"key_0\": 8303.346610453038\n      },\n      \"waterTemperature\": {\n        \"key_0\": 3322.7629019565607\n      },\n      \"currentSpeed\": {\n        \"key_0\": 2626.350061042112\n      },\n      \"currentDirection\": {\n        \"key_0\": 9776.599913495478\n      },\n      \"visibility\": {\n        \"key_0\": 764.2935223986647,\n        \"key_1\": 4471.288662269237,\n        \"key_2\": 6549.1386854899865\n      },\n      \"seaLevel\": {\n        \"key_0\": 7847.214498207052\n      }\n    },\n    {\n      \"time\": \"string\",\n      \"airTemperature\": {\n        \"key_0\": 39.58754140143683\n      },\n      \"windSpeed\": {\n        \"key_0\": 9682.686703038966,\n        \"key_1\": 456.17127443042136\n      },\n      \"windDirection\": {\n        \"key_0\": 8789.558013881451,\n        \"key_1\": 5797.042206356976\n      },\n      \"gust\": {\n        \"key_0\": 6256.744894898762,\n        \"key_1\": 8473.016418502533,\n        \"key_2\": 4818.584490498404\n      },\n      \"humidity\": {\n        \"key_0\": 8228.472208337307,\n        \"key_1\": 7343.5157356802365,\n        \"key_2\": 9877.418784206453\n      },\n      \"pressure\": {\n        \"key_0\": 7074.670775197641,\n        \"key_1\": 862.8465121012008,\n        \"key_2\": 5620.100386652046\n      },\n      \"cloudCover\": {\n        \"key_0\": 7037.400694410156\n      },\n      \"precipitation\": {\n        \"key_0\": 943.8186679992799,\n        \"key_1\": 1379.728590663415\n      },\n      \"waveHeight\": {\n        \"key_0\": 2700.0259307944243\n      },\n      \"waveDirection\": {\n        \"key_0\": 838.6927896560603,\n        \"key_1\": 1713.6605303080833,\n        \"key_2\": 1332.5483951103568\n      },\n      \"wavePeriod\": {\n        \"key_0\": 2760.4339325715555\n      },\n      \"swellHeight\": {\n        \"key_0\": 9990.539570859606,\n        \"key_1\": 979.4050326497284\n      },\n      \"swellDirection\": {\n        \"key_0\": 7590.709918628841,\n        \"key_1\": 4377.965922715627,\n        \"key_2\": 114.22916452326737,\n        \"key_3\": 3684.0299592264846\n      },\n      \"swellPeriod\": {\n        \"key_0\": 8187.20997544731,\n        \"key_1\": 7210.538001459884\n      },\n      \"waterTemperature\": {\n        \"key_0\": 5869.694291433888,\n        \"key_1\": 3286.5702892157656,\n        \"key_2\": 580.4086978771395\n      },\n      \"currentSpeed\": {\n        \"key_0\": 3568.6142424166555\n      },\n      \"currentDirection\": {\n        \"key_0\": 9722.924951268236\n      },\n      \"visibility\": {\n        \"key_0\": 8795.038540760142,\n        \"key_1\": 9056.684988631494\n      },\n      \"seaLevel\": {\n        \"key_0\": 906.7075358897914,\n        \"key_1\": 6423.418603347652\n      }\n    }\n  ],\n  \"meta\": {\n    \"cost\": 1558,\n    \"dailyQuota\": 8020,\n    \"requestCount\": 5555,\n    \"lat\": 2951.526051943988,\n    \"lng\": 5404.638667303891,\n    \"params\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf10e371-a455-4896-bc92-5d902fbb3600",
+              "name": "Authentication failed. Check your API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fad2a6f-2cd3-4c1b-9d81-75a5357b75b4",
+              "name": "Daily quota exceeded or payment required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "marine",
+                    "point"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lng",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "params",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stormglass.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "068ace9f-6dd0-40f8-aff4-41feb358916f",
+    "name": "Stormglass Astronomy Marine API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.\n\nContact Support:\n Name: Stormglass Support",
+      "type": "text/plain"
+    }
+  }
+}

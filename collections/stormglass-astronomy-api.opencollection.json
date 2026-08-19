@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass Astronomy API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Astronomy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Astronomy Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/astronomy/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for start date"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for end date"
+              }
+            ]
+          },
+          "docs": "Retrieve astronomical data for a single coordinate including sunrise, sunset, moonrise, moonset, moon phase, civil dawn/dusk, nautical dawn/dusk, and astronomical dawn/dusk."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

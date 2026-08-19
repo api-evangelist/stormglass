@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass Astronomy Tides API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tides",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Tide Extremes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/extremes",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for start of time range"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for end of time range"
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Datum relative to which values will be reported. Either MLLW or MSL."
+              }
+            ]
+          },
+          "docs": "Retrieve information about high and low tide extremes for a single coordinate. Returns tide high and low events with timestamps and heights. If no datum is specified, values are relative to Mean Sea Level (MSL)."
+        },
+        {
+          "info": {
+            "name": "Get Tide Sea Level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/sea-level",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for start of time range"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for end of time range"
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Datum relative to which values will be reported"
+              }
+            ]
+          },
+          "docs": "Retrieve the sea level in meters on an hourly basis for a single coordinate. If no datum is specified, values are relative to Mean Sea Level (MSL)."
+        },
+        {
+          "info": {
+            "name": "List Tide Stations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/stations"
+          },
+          "docs": "Retrieve a list of all available tide stations. Returns station names, coordinates, and data sources."
+        },
+        {
+          "info": {
+            "name": "List Tide Stations for Area",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/tide/stations/area",
+            "params": [
+              {
+                "name": "box",
+                "value": "",
+                "type": "query",
+                "description": "Top-right and bottom-left coordinates of the bounding box in format: lat,lng:lat,lng"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all tide stations within a defined geographic area defined by a bounding box."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

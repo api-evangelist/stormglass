@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass Astronomy Marine API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Marine",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Marine Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/marine/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of marine parameters to retrieve"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first forecast hour"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last forecast hour"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources"
+              }
+            ]
+          },
+          "docs": "Retrieve hourly marine environment data for a single coordinate. Returns wave, swell, current, and water temperature parameters from multiple marine data sources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

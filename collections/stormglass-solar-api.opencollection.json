@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stormglass Astronomy Solar API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Solar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Solar Point Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stormglass.io/v2/solar/point",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the desired coordinate"
+              },
+              {
+                "name": "lng",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the desired coordinate"
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of solar parameters. E.g. uvIndex,downwardShortWaveRadiationFlux"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for first data hour"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp in UTC for last data hour"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Specify a single source or comma-separated list of sources"
+              }
+            ]
+          },
+          "docs": "Retrieve solar radiation data for a single coordinate including UV index and downward short-wave radiation flux (GHI)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
