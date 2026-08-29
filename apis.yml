@@ -7,6 +7,18 @@ description: >-
   solar and astronomical data, biological oceanographic data, and elevation/bathymetry data. Used widely for maritime
   navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring applications.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
