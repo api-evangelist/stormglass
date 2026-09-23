@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Stormglass Astronomy API
   description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
@@ -62,52 +62,27 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
-  responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    MetaData:
+    Error:
       type: object
-      description: Metadata about the API request including quota information
       properties:
-        cost:
-          type: integer
-          description: Number of API credits consumed by this request
-        dailyQuota:
-          type: integer
-          description: Your daily API call quota
-        requestCount:
-          type: integer
-          description: Total number of API calls made today
-        lat:
-          type: number
-          format: float
-          description: Latitude of the requested coordinate
-        lng:
-          type: number
-          format: float
-          description: Longitude of the requested coordinate
-        params:
-          type: array
-          items:
+        errors:
+          type: object
+          additionalProperties:
             type: string
-          description: List of parameters returned
-        start:
+    MoonPhase:
+      type: object
+      properties:
+        text:
           type: string
-          description: Start timestamp of the returned data
-        end:
+          description: Description of the moon phase
+        time:
           type: string
-          description: End timestamp of the returned data
+          description: Timestamp in UTC for the moon phase
+        value:
+          type: number
+          format: float
+          description: Numeric value for the moon phase (0.0-1.0)
     AstronomyPointResponse:
       type: object
       properties:
@@ -117,13 +92,6 @@ components:
             $ref: '#/components/schemas/AstronomyDay'
         meta:
           $ref: '#/components/schemas/MetaData'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
     AstronomyDay:
       type: object
       properties:
@@ -171,19 +139,51 @@ components:
         astronomicalDusk:
           type: string
           description: Astronomical dusk time in UTC
-    MoonPhase:
+    MetaData:
       type: object
+      description: Metadata about the API request including quota information
       properties:
-        text:
-          type: string
-          description: Description of the moon phase
-        time:
-          type: string
-          description: Timestamp in UTC for the moon phase
-        value:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
           type: number
           format: float
-          description: Numeric value for the moon phase (0.0-1.0)
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

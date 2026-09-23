@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stormglass Astronomy Solar API
+  title: Stormglass Solar API
   description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
   version: v2
   contact:
@@ -74,26 +74,33 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
-  responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    SourceValue:
+    SolarHour:
       type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        uvIndex:
+          $ref: '#/components/schemas/SourceValue'
+        downwardShortWaveRadiationFlux:
+          $ref: '#/components/schemas/SourceValue'
+    SolarPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SolarHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -126,32 +133,25 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    SolarPointResponse:
+    SourceValue:
       type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SolarHour'
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-    SolarHour:
-      type: object
-      properties:
-        time:
-          type: string
-          description: Timestamp in UTC
-        uvIndex:
-          $ref: '#/components/schemas/SourceValue'
-        downwardShortWaveRadiationFlux:
-          $ref: '#/components/schemas/SourceValue'
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

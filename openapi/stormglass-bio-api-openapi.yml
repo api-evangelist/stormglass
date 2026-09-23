@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stormglass Astronomy Bio API
+  title: Stormglass Bio API
   description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
   version: v2
   contact:
@@ -75,6 +75,13 @@ paths:
           $ref: '#/components/responses/QuotaExceeded'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     BioPointResponse:
       type: object
       properties:
@@ -84,12 +91,6 @@ components:
             $ref: '#/components/schemas/BioHour'
         meta:
           $ref: '#/components/schemas/MetaData'
-    SourceValue:
-      type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -122,13 +123,12 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    Error:
+    SourceValue:
       type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
     BioHour:
       type: object
       description: Hourly biological and oceanographic data

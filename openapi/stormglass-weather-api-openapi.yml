@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stormglass Astronomy Weather API
+  title: Stormglass Weather API
   description: Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The API supports weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation data. Commonly used for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring.
   version: v2
   contact:
@@ -76,32 +76,24 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
-  responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: Invalid parameters in the request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    SourceValue:
+    Error:
       type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    WeatherPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherHour'
+          description: Hourly weather data
+        meta:
+          $ref: '#/components/schemas/MetaData'
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -134,23 +126,12 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    WeatherPointResponse:
+    SourceValue:
       type: object
-      properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeatherHour'
-          description: Hourly weather data
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
     WeatherHour:
       type: object
       description: Hourly weather data for one time interval
@@ -196,6 +177,25 @@ components:
           $ref: '#/components/schemas/SourceValue'
         seaLevel:
           $ref: '#/components/schemas/SourceValue'
+  responses:
+    UnprocessableEntity:
+      description: Invalid parameters in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey
