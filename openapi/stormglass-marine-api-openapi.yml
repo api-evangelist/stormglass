@@ -75,61 +75,6 @@ paths:
           $ref: '#/components/responses/QuotaExceeded'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-    WeatherPointResponse:
-      type: object
-      properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeatherHour'
-          description: Hourly weather data
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    MetaData:
-      type: object
-      description: Metadata about the API request including quota information
-      properties:
-        cost:
-          type: integer
-          description: Number of API credits consumed by this request
-        dailyQuota:
-          type: integer
-          description: Your daily API call quota
-        requestCount:
-          type: integer
-          description: Total number of API calls made today
-        lat:
-          type: number
-          format: float
-          description: Latitude of the requested coordinate
-        lng:
-          type: number
-          format: float
-          description: Longitude of the requested coordinate
-        params:
-          type: array
-          items:
-            type: string
-          description: List of parameters returned
-        start:
-          type: string
-          description: Start timestamp of the returned data
-        end:
-          type: string
-          description: End timestamp of the returned data
-    SourceValue:
-      type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
     WeatherHour:
       type: object
       description: Hourly weather data for one time interval
@@ -175,15 +120,70 @@ components:
           $ref: '#/components/schemas/SourceValue'
         seaLevel:
           $ref: '#/components/schemas/SourceValue'
+    WeatherPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherHour'
+          description: Hourly weather data
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
   responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
+    Unauthorized:
+      description: Authentication failed. Check your API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
       content:
         application/json:
           schema:

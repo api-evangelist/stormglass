@@ -74,6 +74,19 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     SolarHour:
       type: object
@@ -85,6 +98,12 @@ components:
           $ref: '#/components/schemas/SourceValue'
         downwardShortWaveRadiationFlux:
           $ref: '#/components/schemas/SourceValue'
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
     SolarPointResponse:
       type: object
       properties:
@@ -94,13 +113,6 @@ components:
             $ref: '#/components/schemas/SolarHour'
         meta:
           $ref: '#/components/schemas/MetaData'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -133,25 +145,13 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    SourceValue:
+    Error:
       type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
-  responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
   securitySchemes:
     apiKeyAuth:
       type: apiKey

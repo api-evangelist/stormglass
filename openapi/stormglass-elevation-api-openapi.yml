@@ -50,7 +50,27 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    ElevationPointResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ElevationData'
+        meta:
+          $ref: '#/components/schemas/ElevationMeta'
     ElevationMeta:
       type: object
       properties:
@@ -74,20 +94,6 @@ components:
               type: string
             source:
               type: string
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-    ElevationPointResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ElevationData'
-        meta:
-          $ref: '#/components/schemas/ElevationMeta'
     ElevationData:
       type: object
       properties:
@@ -95,19 +101,13 @@ components:
           type: number
           format: float
           description: Elevation in meters relative to sea level
-  responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
   securitySchemes:
     apiKeyAuth:
       type: apiKey

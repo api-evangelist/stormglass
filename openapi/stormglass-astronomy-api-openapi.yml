@@ -62,36 +62,20 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-    MoonPhase:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Description of the moon phase
-        time:
-          type: string
-          description: Timestamp in UTC for the moon phase
-        value:
-          type: number
-          format: float
-          description: Numeric value for the moon phase (0.0-1.0)
-    AstronomyPointResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AstronomyDay'
-        meta:
-          $ref: '#/components/schemas/MetaData'
     AstronomyDay:
       type: object
       properties:
@@ -139,6 +123,28 @@ components:
         astronomicalDusk:
           type: string
           description: Astronomical dusk time in UTC
+    MoonPhase:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Description of the moon phase
+        time:
+          type: string
+          description: Timestamp in UTC for the moon phase
+        value:
+          type: number
+          format: float
+          description: Numeric value for the moon phase (0.0-1.0)
+    AstronomyPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AstronomyDay'
+        meta:
+          $ref: '#/components/schemas/MetaData'
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -171,19 +177,13 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-  responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
   securitySchemes:
     apiKeyAuth:
       type: apiKey
