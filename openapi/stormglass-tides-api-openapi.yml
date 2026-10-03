@@ -164,20 +164,56 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    TideExtremesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TideExtremePoint'
+          description: List of tide extreme events
+        meta:
+          $ref: '#/components/schemas/TideMetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     StationMetaData:
       type: object
       properties:
@@ -212,16 +248,26 @@ components:
             $ref: '#/components/schemas/TideStation'
         meta:
           $ref: '#/components/schemas/StationMetaData'
-    TideExtremesResponse:
+    TideSeaLevelHour:
       type: object
+      description: Hourly sea level data from multiple sources
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TideExtremePoint'
-          description: List of tide extreme events
-        meta:
-          $ref: '#/components/schemas/TideMetaData'
+        time:
+          type: string
+          description: Timestamp in UTC
+        sg:
+          type: number
+          format: float
+          description: Stormglass composite sea level value in meters
+        noaa:
+          type: number
+          format: float
+        icon:
+          type: number
+          format: float
+        dwd:
+          type: number
+          format: float
     TideStation:
       type: object
       properties:
@@ -248,65 +294,6 @@ components:
             $ref: '#/components/schemas/TideSeaLevelHour'
         meta:
           $ref: '#/components/schemas/TideMetaData'
-    TideSeaLevelHour:
-      type: object
-      description: Hourly sea level data from multiple sources
-      properties:
-        time:
-          type: string
-          description: Timestamp in UTC
-        sg:
-          type: number
-          format: float
-          description: Stormglass composite sea level value in meters
-        noaa:
-          type: number
-          format: float
-        icon:
-          type: number
-          format: float
-        dwd:
-          type: number
-          format: float
-    MetaData:
-      type: object
-      description: Metadata about the API request including quota information
-      properties:
-        cost:
-          type: integer
-          description: Number of API credits consumed by this request
-        dailyQuota:
-          type: integer
-          description: Your daily API call quota
-        requestCount:
-          type: integer
-          description: Total number of API calls made today
-        lat:
-          type: number
-          format: float
-          description: Latitude of the requested coordinate
-        lng:
-          type: number
-          format: float
-          description: Longitude of the requested coordinate
-        params:
-          type: array
-          items:
-            type: string
-          description: List of parameters returned
-        start:
-          type: string
-          description: Start timestamp of the returned data
-        end:
-          type: string
-          description: End timestamp of the returned data
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
     TideMetaData:
       allOf:
       - $ref: '#/components/schemas/MetaData'
@@ -335,6 +322,19 @@ components:
               source:
                 type: string
                 description: Tide station owner or data source
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

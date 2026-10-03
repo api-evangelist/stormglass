@@ -74,35 +74,39 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    BioPointResponse:
+    MetaData:
       type: object
+      description: Metadata about the API request including quota information
       properties:
-        hours:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
           type: array
           items:
-            $ref: '#/components/schemas/BioHour'
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    SourceValue:
-      type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
     BioHour:
       type: object
       description: Hourly biological and oceanographic data
@@ -136,38 +140,21 @@ components:
           $ref: '#/components/schemas/SourceValue'
         surfaceTemperature:
           $ref: '#/components/schemas/SourceValue'
-    MetaData:
+    BioPointResponse:
       type: object
-      description: Metadata about the API request including quota information
       properties:
-        cost:
-          type: integer
-          description: Number of API credits consumed by this request
-        dailyQuota:
-          type: integer
-          description: Your daily API call quota
-        requestCount:
-          type: integer
-          description: Total number of API calls made today
-        lat:
-          type: number
-          format: float
-          description: Latitude of the requested coordinate
-        lng:
-          type: number
-          format: float
-          description: Longitude of the requested coordinate
-        params:
+        hours:
           type: array
           items:
-            type: string
-          description: List of parameters returned
-        start:
-          type: string
-          description: Start timestamp of the returned data
-        end:
-          type: string
-          description: End timestamp of the returned data
+            $ref: '#/components/schemas/BioHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
     Error:
       type: object
       properties:
@@ -175,6 +162,19 @@ components:
           type: object
           additionalProperties:
             type: string
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

@@ -62,20 +62,55 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    MetaData:
+      type: object
+      description: Metadata about the API request including quota information
+      properties:
+        cost:
+          type: integer
+          description: Number of API credits consumed by this request
+        dailyQuota:
+          type: integer
+          description: Your daily API call quota
+        requestCount:
+          type: integer
+          description: Total number of API calls made today
+        lat:
+          type: number
+          format: float
+          description: Latitude of the requested coordinate
+        lng:
+          type: number
+          format: float
+          description: Longitude of the requested coordinate
+        params:
+          type: array
+          items:
+            type: string
+          description: List of parameters returned
+        start:
+          type: string
+          description: Start timestamp of the returned data
+        end:
+          type: string
+          description: End timestamp of the returned data
+    AstronomyPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AstronomyDay'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     AstronomyDay:
       type: object
       properties:
@@ -136,54 +171,19 @@ components:
           type: number
           format: float
           description: Numeric value for the moon phase (0.0-1.0)
-    AstronomyPointResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AstronomyDay'
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    MetaData:
-      type: object
-      description: Metadata about the API request including quota information
-      properties:
-        cost:
-          type: integer
-          description: Number of API credits consumed by this request
-        dailyQuota:
-          type: integer
-          description: Your daily API call quota
-        requestCount:
-          type: integer
-          description: Total number of API calls made today
-        lat:
-          type: number
-          format: float
-          description: Latitude of the requested coordinate
-        lng:
-          type: number
-          format: float
-          description: Longitude of the requested coordinate
-        params:
-          type: array
-          items:
-            type: string
-          description: List of parameters returned
-        start:
-          type: string
-          description: Start timestamp of the returned data
-        end:
-          type: string
-          description: End timestamp of the returned data
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey
