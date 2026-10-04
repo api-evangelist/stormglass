@@ -95,22 +95,6 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    AstronomyPointResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AstronomyDay'
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
     AstronomyDay:
       type: object
       properties:
@@ -158,6 +142,15 @@ components:
         astronomicalDusk:
           type: string
           description: Astronomical dusk time in UTC
+    AstronomyPointResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AstronomyDay'
+        meta:
+          $ref: '#/components/schemas/MetaData'
     MoonPhase:
       type: object
       properties:
@@ -171,15 +164,22 @@ components:
           type: number
           format: float
           description: Numeric value for the moon phase (0.0-1.0)
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
   responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
+    Unauthorized:
+      description: Authentication failed. Check your API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
       content:
         application/json:
           schema:

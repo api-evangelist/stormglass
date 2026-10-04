@@ -107,6 +107,16 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
+    WeatherPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherHour'
+          description: Hourly weather data
+        meta:
+          $ref: '#/components/schemas/MetaData'
     WeatherHour:
       type: object
       description: Hourly weather data for one time interval
@@ -152,22 +162,6 @@ components:
           $ref: '#/components/schemas/SourceValue'
         seaLevel:
           $ref: '#/components/schemas/SourceValue'
-    WeatherPointResponse:
-      type: object
-      properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeatherHour'
-          description: Hourly weather data
-        meta:
-          $ref: '#/components/schemas/MetaData'
-    SourceValue:
-      type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
     Error:
       type: object
       properties:
@@ -175,15 +169,21 @@ components:
           type: object
           additionalProperties:
             type: string
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
   responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
+    Unauthorized:
+      description: Authentication failed. Check your API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
       content:
         application/json:
           schema:

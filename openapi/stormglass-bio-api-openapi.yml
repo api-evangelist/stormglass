@@ -107,6 +107,22 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
+    BioPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/BioHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     BioHour:
       type: object
       description: Hourly biological and oceanographic data
@@ -140,37 +156,21 @@ components:
           $ref: '#/components/schemas/SourceValue'
         surfaceTemperature:
           $ref: '#/components/schemas/SourceValue'
-    BioPointResponse:
-      type: object
-      properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/BioHour'
-        meta:
-          $ref: '#/components/schemas/MetaData'
     SourceValue:
       type: object
       description: A weather parameter value from a specific source
       additionalProperties:
         type: number
         format: float
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
   responses:
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
+    Unauthorized:
+      description: Authentication failed. Check your API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Check your API key.
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
       content:
         application/json:
           schema:
