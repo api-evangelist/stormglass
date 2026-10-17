@@ -75,6 +75,15 @@ paths:
           $ref: '#/components/responses/QuotaExceeded'
 components:
   schemas:
+    BioPointResponse:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/BioHour'
+        meta:
+          $ref: '#/components/schemas/MetaData'
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -107,15 +116,6 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    BioPointResponse:
-      type: object
-      properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/BioHour'
-        meta:
-          $ref: '#/components/schemas/MetaData'
     Error:
       type: object
       properties:
@@ -123,6 +123,12 @@ components:
           type: object
           additionalProperties:
             type: string
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
     BioHour:
       type: object
       description: Hourly biological and oceanographic data
@@ -156,21 +162,15 @@ components:
           $ref: '#/components/schemas/SourceValue'
         surfaceTemperature:
           $ref: '#/components/schemas/SourceValue'
-    SourceValue:
-      type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
   responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
+    Unauthorized:
+      description: Authentication failed. Check your API key.
       content:
         application/json:
           schema:

@@ -74,6 +74,19 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     MetaData:
       type: object
@@ -107,6 +120,13 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     SolarPointResponse:
       type: object
       properties:
@@ -116,6 +136,12 @@ components:
             $ref: '#/components/schemas/SolarHour'
         meta:
           $ref: '#/components/schemas/MetaData'
+    SourceValue:
+      type: object
+      description: A weather parameter value from a specific source
+      additionalProperties:
+        type: number
+        format: float
     SolarHour:
       type: object
       properties:
@@ -126,32 +152,6 @@ components:
           $ref: '#/components/schemas/SourceValue'
         downwardShortWaveRadiationFlux:
           $ref: '#/components/schemas/SourceValue'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-    SourceValue:
-      type: object
-      description: A weather parameter value from a specific source
-      additionalProperties:
-        type: number
-        format: float
-  responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

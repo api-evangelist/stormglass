@@ -62,6 +62,19 @@ paths:
         '402':
           $ref: '#/components/responses/QuotaExceeded'
 components:
+  responses:
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Check your API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     MetaData:
       type: object
@@ -95,6 +108,13 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     AstronomyDay:
       type: object
       properties:
@@ -164,26 +184,6 @@ components:
           type: number
           format: float
           description: Numeric value for the moon phase (0.0-1.0)
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

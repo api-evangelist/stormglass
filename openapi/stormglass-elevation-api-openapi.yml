@@ -58,6 +58,13 @@ components:
           $ref: '#/components/schemas/ElevationData'
         meta:
           $ref: '#/components/schemas/ElevationMeta'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     ElevationMeta:
       type: object
       properties:
@@ -88,22 +95,15 @@ components:
           type: number
           format: float
           description: Elevation in meters relative to sea level
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
   responses:
-    Unauthorized:
-      description: Authentication failed. Check your API key.
+    QuotaExceeded:
+      description: Daily quota exceeded or payment required.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    QuotaExceeded:
-      description: Daily quota exceeded or payment required.
+    Unauthorized:
+      description: Authentication failed. Check your API key.
       content:
         application/json:
           schema:

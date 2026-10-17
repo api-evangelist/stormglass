@@ -165,6 +165,39 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    TideStation:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: float
+          description: Latitude of the tide station
+        lng:
+          type: number
+          format: float
+          description: Longitude of the tide station
+        name:
+          type: string
+          description: Name of the tide station
+        source:
+          type: string
+          description: Tide station owner
+    TideExtremePoint:
+      type: object
+      properties:
+        height:
+          type: number
+          format: float
+          description: Tide height in meters
+        time:
+          type: string
+          description: Timestamp in UTC for this tide event
+        type:
+          type: string
+          enum:
+          - low
+          - high
+          description: Type of tide extreme
     MetaData:
       type: object
       description: Metadata about the API request including quota information
@@ -197,26 +230,13 @@ components:
         end:
           type: string
           description: End timestamp of the returned data
-    TideSeaLevelHour:
+    Error:
       type: object
-      description: Hourly sea level data from multiple sources
       properties:
-        time:
-          type: string
-          description: Timestamp in UTC
-        sg:
-          type: number
-          format: float
-          description: Stormglass composite sea level value in meters
-        noaa:
-          type: number
-          format: float
-        icon:
-          type: number
-          format: float
-        dwd:
-          type: number
-          format: float
+        errors:
+          type: object
+          additionalProperties:
+            type: string
     TideStationsResponse:
       type: object
       properties:
@@ -226,31 +246,6 @@ components:
             $ref: '#/components/schemas/TideStation'
         meta:
           $ref: '#/components/schemas/StationMetaData'
-    TideExtremePoint:
-      type: object
-      properties:
-        height:
-          type: number
-          format: float
-          description: Tide height in meters
-        time:
-          type: string
-          description: Timestamp in UTC for this tide event
-        type:
-          type: string
-          enum:
-          - low
-          - high
-          description: Type of tide extreme
-    StationMetaData:
-      type: object
-      properties:
-        cost:
-          type: integer
-        dailyQuota:
-          type: integer
-        requestCount:
-          type: integer
     TideSeaLevelResponse:
       type: object
       properties:
@@ -260,40 +255,15 @@ components:
             $ref: '#/components/schemas/TideSeaLevelHour'
         meta:
           $ref: '#/components/schemas/TideMetaData'
-    TideStation:
+    StationMetaData:
       type: object
       properties:
-        lat:
-          type: number
-          format: float
-          description: Latitude of the tide station
-        lng:
-          type: number
-          format: float
-          description: Longitude of the tide station
-        name:
-          type: string
-          description: Name of the tide station
-        source:
-          type: string
-          description: Tide station owner
-    TideExtremesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TideExtremePoint'
-          description: List of tide extreme events
-        meta:
-          $ref: '#/components/schemas/TideMetaData'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
+        cost:
+          type: integer
+        dailyQuota:
+          type: integer
+        requestCount:
+          type: integer
     TideMetaData:
       allOf:
       - $ref: '#/components/schemas/MetaData'
@@ -322,6 +292,36 @@ components:
               source:
                 type: string
                 description: Tide station owner or data source
+    TideSeaLevelHour:
+      type: object
+      description: Hourly sea level data from multiple sources
+      properties:
+        time:
+          type: string
+          description: Timestamp in UTC
+        sg:
+          type: number
+          format: float
+          description: Stormglass composite sea level value in meters
+        noaa:
+          type: number
+          format: float
+        icon:
+          type: number
+          format: float
+        dwd:
+          type: number
+          format: float
+    TideExtremesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TideExtremePoint'
+          description: List of tide extreme events
+        meta:
+          $ref: '#/components/schemas/TideMetaData'
   responses:
     QuotaExceeded:
       description: Daily quota exceeded or payment required.
