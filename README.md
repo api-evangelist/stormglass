@@ -1,4 +1,4 @@
-# Stormglass (stormglass)
+# Stormglass
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,80 +66,179 @@
 
 Stormglass provides a global marine and weather API delivering high-resolution forecasts, historical data, and environmental measurements for any coordinate on Earth. The platform aggregates data from multiple authoritative sources including NOAA, ECMWF, DWD, and others to provide weather point forecasts, marine data, tidal information, solar and astronomical data, biological oceanographic data, and elevation/bathymetry data. Used widely for maritime navigation, renewable energy forecasting, outdoor activity planning, and environmental monitoring applications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/stormglass/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/stormglass/refs/heads/main/apis.yml)
+**Areas:** Astronomy · Bio · Climate · Elevation · Forecasting · Marine · Ocean · Solar · Tides · Weather · Wind
 
-## Scope
+## Stormglass on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Stormglass is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/stormglass/](https://apis.io/providers/stormglass/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Astronomy
-- Bio
-- Climate
-- Elevation
-- Forecasting
-- Marine
-- Ocean
-- Solar
-- Tides
-- Weather
-- Wind
+- [Stormglass Astronomy API](https://apis.io/apis/stormglass/stormglass-astronomy-api/) — Solar and lunar astronomical data including sunrise, sunset, moon phases
+- [Stormglass Bio API](https://apis.io/apis/stormglass/stormglass-bio-api/) — Biological and oceanographic data including chlorophyll and nutrients
+- [Stormglass Elevation API](https://apis.io/apis/stormglass/stormglass-elevation-api/) — Global elevation and bathymetry data
+- [Stormglass Marine API](https://apis.io/apis/stormglass/stormglass-marine-api/) — Marine environment data including waves, currents, and water temperature
+- [Stormglass Solar API](https://apis.io/apis/stormglass/stormglass-solar-api/) — Solar radiation and UV index data
+- [Stormglass Tides API](https://apis.io/apis/stormglass/stormglass-tides-api/) — Tidal data including extremes, sea level, and tide station listings
+- [Stormglass Weather API](https://apis.io/apis/stormglass/stormglass-weather-api/) — Point weather forecasts and historical weather data
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-05-02
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Stormglass API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Stormglass API provides global weather, marine, tidal, astronomical, solar, biological, and elevation data for any coordinate on Earth. It aggregates data from multiple meteorological and oceanographic sources into a single REST API. All endpoints return JSON and use API key authentication via the Authorization header.
+- [Stormglass Agentic Access](https://apis.io/agentic-access/stormglass/stormglass-agentic-access/)
 
-- **Human URL:** [https://stormglass.io/](https://stormglass.io/)
-- **Base URL:** `https://api.stormglass.io/v2`
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Astronomy
-- Bio
-- Elevation
-- Forecasting
-- Marine
-- Solar
-- Tides
-- Weather
+- [Tide Extremes Response](https://apis.io/schemas/stormglass/stormglass-tide-extremes/)
+- [Weather Point Response](https://apis.io/schemas/stormglass/stormglass-weather-point/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.stormglass.io/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/stormglass/refs/heads/main/openapi/stormglass-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Pricing](https://stormglass.io/pricing)
-- [Sign Up](https://stormglass.io/register)
+Data models expressed in JSON Structure.
+
+- [Stormglass Weather Point Structure](https://apis.io/json-structure/stormglass/stormglass-weather-point-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Stormglass Context](https://apis.io/jsonld/stormglass/stormglass-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Stormglass API Vocabulary](https://apis.io/vocabularies/stormglass/stormglass-vocabulary/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Stormglass Get Astronomy Point Example](https://apis.io/examples/stormglass/stormglass-get-astronomy-point-example/)
+- [Stormglass Get Tide Extremes Example](https://apis.io/examples/stormglass/stormglass-get-tide-extremes-example/)
+- [Stormglass Get Weather Point Example](https://apis.io/examples/stormglass/stormglass-get-weather-point-example/)
+
+#### Collections (15)
+
+Postman and Open Collection request collections.
+
+- [Stormglass API](https://apis.io/collections/stormglass/open-stormglass/)
+- [Stormglass Astronomy API](https://apis.io/collections/stormglass/open-stormglass-astronomy-api/)
+- [Stormglass Astronomy Bio API](https://apis.io/collections/stormglass/open-stormglass-bio-api/)
+- [Stormglass Astronomy Elevation API](https://apis.io/collections/stormglass/open-stormglass-elevation-api/)
+- [Stormglass Astronomy Marine API](https://apis.io/collections/stormglass/open-stormglass-marine-api/)
+- [Stormglass Astronomy Solar API](https://apis.io/collections/stormglass/open-stormglass-solar-api/)
+- [Stormglass Astronomy Tides API](https://apis.io/collections/stormglass/open-stormglass-tides-api/)
+- [Stormglass Astronomy Weather API](https://apis.io/collections/stormglass/open-stormglass-weather-api/)
+- [Stormglass Astronomy API](https://apis.io/collections/stormglass/postman-stormglass-astronomy-api/)
+- [Stormglass Astronomy Bio API](https://apis.io/collections/stormglass/postman-stormglass-bio-api/)
+- [Stormglass Astronomy Elevation API](https://apis.io/collections/stormglass/postman-stormglass-elevation-api/)
+- [Stormglass Astronomy Marine API](https://apis.io/collections/stormglass/postman-stormglass-marine-api/)
+- [Stormglass Astronomy Solar API](https://apis.io/collections/stormglass/postman-stormglass-solar-api/)
+- [Stormglass Astronomy Tides API](https://apis.io/collections/stormglass/postman-stormglass-tides-api/)
+- [Stormglass Astronomy Weather API](https://apis.io/collections/stormglass/postman-stormglass-weather-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Stormglass — jsonschema rules](https://apis.io/rules/stormglass/stormglass-jsonschema-spectral-rules/)
+- [Stormglass API Rules](https://apis.io/rules/stormglass/stormglass-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Stormglass Authentication](https://apis.io/security/stormglass/stormglass-authentication/)
+- [Stormglass Domain Security](https://apis.io/security/stormglass/stormglass-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Stormglass Plans Pricing](https://apis.io/plans/stormglass/stormglass-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Stormglass Rate Limits](https://apis.io/rate-limits/stormglass/stormglass-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Stormglass Finops](https://apis.io/finops/stormglass/stormglass-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://stormglass.io/)
-- [Blog](https://stormglass.io/blog)
-- [Terms of Service](https://stormglass.io/terms-and-conditions/)
-- [Privacy Policy](https://stormglass.io/privacy-policy/)
-- [Postman Collection](collections/stormglass.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stormglass.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/stormglassio)
-- [Portal](https://stormglass.io/)
 - [Documentation](https://docs.stormglass.io/)
-- [Sign Up](https://stormglass.io/register)
 - [Pricing](https://stormglass.io/pricing)
-- [Website](https://stormglass.io/)
 - [Blog](https://stormglass.io/blog)
-- [Terms of Service](https://stormglass.io/terms-and-conditions/)
-- [Privacy Policy](https://stormglass.io/privacy-policy/)
-- [Git Hub Org](https://github.com/stormglass)
+- [Terms of service](https://stormglass.io/terms-and-conditions/)
+- [Privacy policy](https://stormglass.io/privacy-policy/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 39.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 60.5 |
+| Contract governance | 13.6 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 42.1 |
+
+**Agent readiness 21.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/stormglass/](https://apis.io/providers/stormglass/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Stormglass: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/stormglass/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
